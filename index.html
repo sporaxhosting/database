@@ -1,631 +1,1112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORAX — The Wealth & Ownership Database</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SPORAX WEALTH & ASSET DATABASES</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --dark-blue: #1A2942;
-            --gold: #DAB76D;
-            --white: #FFFFFD;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--white);
-            color: var(--dark-blue);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Hero Section */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 40px;
-        }
-        .logo-header img {
-            height: 40px;
-        }
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 450px;
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(145deg, #e0eafc, #c0c6e0);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        .hero-logo img {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        .hero-title {
-            font-size: 2.5em;
-            font-weight: 500;
-            margin: 0;
-            color: var(--dark-blue);
-        }
-        .hero-subtitle {
-            font-size: 1.2em;
-            font-weight: 300;
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-        }
-        .update-indicator {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-        .search-container {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background-color: var(--white);
-        }
-        .search-bar {
-            flex-grow: 1;
-            border: none;
-            padding: 15px 25px;
-            font-size: 1.1em;
-            outline: none;
-            font-family: 'Roboto', sans-serif;
-        }
-        .search-button {
-            border: none;
-            background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 15px 30px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .search-button:hover {
-            background-color: var(--gold);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 60px 0;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2em;
-            font-weight: 500;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--gold);
-            margin: 10px auto 0;
-        }
-
-        /* Profile Cards */
-        .profile-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .profile-card {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-        .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 20px;
-        }
-        .profile-header img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-right: 20px;
-            object-fit: cover;
-        }
-        .profile-header h3 {
-            font-size: 1.8em;
-            margin: 0;
-            font-weight: 500;
-            color: var(--dark-blue);
-        }
-        .profile-header .net-worth {
-            margin-left: auto;
-            text-align: right;
-        }
-        .profile-header .net-worth .label {
-            font-size: 0.9em;
-            color: #777;
-            font-weight: 400;
-        }
-        .profile-header .net-worth .value {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: var(--gold);
-        }
-        .profile-body h4 {
-            font-size: 1.2em;
-            margin-top: 0;
-            color: var(--dark-blue);
-            border-bottom: 1px solid #e9e9e9;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .profile-body p {
-            font-size: 1em;
-            color: #555;
-            margin: 10px 0;
-        }
-        .profile-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .profile-list li {
-            padding: 8px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px dashed #e9e9e9;
-        }
-        .profile-list li:last-child {
-            border-bottom: none;
-        }
-        .profile-list .label {
-            font-weight: 500;
-        }
-        .profile-list .value {
-            font-weight: 400;
-            color: #777;
-        }
-        .tags {
-            margin-top: 15px;
-        }
-        .tag {
-            display: inline-block;
-            background-color: #e6e6e6;
-            color: #555;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-        .card-spacer {
-            height: 30px;
-            border-bottom: 1px dashed #ddd;
-            margin: 30px 0;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #e0e0e0;
-            color: #777;
-            font-size: 0.9em;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .header-gradient { background: -webkit-linear-gradient(45deg, #fde047, #fcd34d, #f97316);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-bg { background-color: #1e293b; }
+        .person-card { transition: opacity 0.4s ease-in; opacity: 1; }
+        .fade-in-initial { opacity: 0; }
+        .fade-in-initial.ready { opacity: 1; }
+        .flag { font-size: 20px; margin-right: 6px; }
     </style>
 </head>
-<body>
-
-    <header class="header container">
-        <div class="logo-header">
-            <img src="https://i.imgur.com/y67wwcn.png" alt="SPORAX Logo">
-        </div>
-    </header>
-
-    <div class="hero-section">
-        <div class="hero-logo">
-            <img src="https://i.imgur.com/y67wwcn.png" alt="SPORAX Logo">
-        </div>
-        <h1 class="hero-title">SPORAX — The Wealth & Ownership Database</h1>
-        <p class="hero-subtitle">Made Simple</p>
-        <p class="update-indicator" id="update-indicator">Updated 7 minutes ago</p>
-        <div class="search-container">
-            <input type="text" id="main-search" class="search-bar" placeholder="Search for a person or company..." onkeyup="filterProfiles()">
-        </div>
-    </div>
-
-    <div class="main-content container">
-        <section id="profiles">
-            <h2 class="section-title">PROFILES</h2>
-            <div class="profile-container" id="profile-list">
+<body class="min-h-screen">
+    <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <header class="text-center mb-16 pt-8">
+            <div class="flex items-center justify-center space-x-4">
+                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-12 h-12 sm:w-16 sm:h-16">
+                <h1 class="header-gradient text-6xl sm:text-8xl font-black tracking-tighter">SPORAX</h1>
+            </div>
+            <p class="text-sm tracking-widest uppercase text-slate-400 mt-2" style="letter-spacing: 0.4em;">
+                Reliable Wealth Analysis since 2003
+            </p>
+            <div class="mt-10 w-full max-w-2xl mx-auto">
+                <div class="flex items-center bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-amber-400 transition-all duration-300 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="search-input" oninput="searchCards(this.value)" placeholder="Search individuals, companies, or assets..." class="w-full bg-transparent text-lg focus:outline-none placeholder-slate-500" />
                 </div>
+            </div>
+        </header>
+
+        <section id="search-results-section" class="mb-20 hidden">
+            <h2 class="text-3xl font-bold text-slate-200 mb-6">Search Results</h2>
+            <div id="search-results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </section>
+
+        <section class="mb-20 p-8 card-bg rounded-xl shadow-lg border border-slate-700 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-8 h-8">
+                <h2 class="text-3xl font-bold text-amber-400">What is SPORAX?</h2>
+            </div>
+            <p class="text-slate-300 leading-relaxed max-w-4xl mx-auto">
+                SPORAX is a leading public wealth and asset database, dedicated to providing timely and highly accurate net worth estimations for notable individuals and valuable businesses globally.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-6 text-sm justify-center">
+                <span class="inline-flex items-center rounded-full bg-red-900 px-3 py-1 text-red-300">RRPT - Public Transactions</span>
+                <span class="inline-flex items-center rounded-full bg-blue-900 px-3 py-1 text-blue-300">IAR - Institutional Records</span>
+                <span class="inline-flex items-center rounded-full bg-green-900 px-3 py-1 text-green-300">RNS - News Sources</span>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-slate-200 mb-6">Highlight News Stories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card-bg p-6 rounded-xl border border-slate-700 hover:border-amber-500 transition-colors cursor-pointer">
+                    <p class="text-xs text-amber-500 mb-1">MARKET WATCH / 3 days ago</p>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100">Tech Baron's Latest Acquisition Shakes Up Logistics Sector</h3>
+                    <p class="text-slate-400 text-sm">A major CEO has finalized a $25B deal, shifting $10B in assets to a new holding company.</p>
+                </div>
+                <div class="card-bg p-6 rounded-xl border border-slate-700 hover:border-amber-500 transition-colors cursor-pointer">
+                    <p class="text-xs text-amber-500 mb-1">FINANCIAL TIMES / 1 week ago</p>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100">Regulatory Filings Reveal New Multi-Million Real Estate Portfolio</h3>
+                    <p class="text-slate-400 text-sm">New RRPT data indicates several high-net-worth individuals are diversifying into luxury European properties.</p>
+                </div>
+                <div class="card-bg p-6 rounded-xl border border-slate-700 hover:border-amber-500 transition-colors cursor-pointer">
+                    <p class="text-xs text-amber-500 mb-1">BUSINESS INSIDER / 2 hours ago</p>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100">Global Philanthropy Pledges: Who's Up and Who's Down?</h3>
+                    <p class="text-slate-400 text-sm">RNS reports show several billionaires committed large portions of their wealth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="popular-cards-section" class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-slate-200">Popular Cards</h2>
+                <div class="flex items-center space-x-3">
+                    <label for="sort-select" class="text-slate-400 text-sm">Sort By:</label>
+                    <select id="sort-select" onchange="sortAndRenderCards()" class="bg-slate-800 text-slate-200 text-sm rounded-lg p-2 border border-slate-700 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="wealth_desc">Net Worth (High to Low)</option>
+                        <option value="name_asc">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+            <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            <div class="text-center mt-12">
+                <button id="load-more-btn" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-3 px-8 rounded-full transition duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+                        onclick="loadMore()">
+                    Load More Cards
+                </button>
+            </div>
         </section>
     </div>
 
-    <footer class="footer">
-        &copy; 2025 SPORAX. All rights reserved.
+    <div id="card-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden" onclick="closeModal()">
+        <div id="modal-content" class="card-bg rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" onclick="event.stopPropagation()"></div>
+    </div>
+
+    <footer class="bg-slate-900 border-t border-slate-800 mt-16 py-8 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-sm text-slate-500 mb-4">
+                © 2026 SPORAX Wealth & Asset Databases. All Rights Reserved.
+            </p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="text-slate-400 hover:text-amber-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="text-slate-400 hover:text-amber-400 transition-colors">Terms of Use</a>
+                <a href="#" class="text-slate-400 hover:text-amber-400 transition-colors">Methodology</a>
+                <a href="#" class="text-slate-400 hover:text-amber-400 transition-colors">Careers</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        const profilesData = [
-            {
-                type: 'individual',
-                name: 'Jonathan Kepler',
-                title: 'Founder, Kepler Energy Partners',
-                netWorth: '$742M',
-                breakdown: {
-                    'Kepler Energy Partners Stock (71% Stake)': '$528M',
-                    'Commercial Real Estate (Houston & Dallas)': '$156M',
-                    'Private Stocks & Equity': '$47M',
-                    'Cash & Liquid Assets': '$11M'
-                },
-                about: 'Jonathan Kepler is a Texas-based energy magnate who built Kepler Energy Partners into a major player in natural gas distribution across the southern United States. He started his career as a petroleum engineer before founding his own company in 2008.',
-                tags: ['Energy', 'Real Estate', 'Investor'],
-                company: {
-                    name: 'Kepler Energy Partners',
-                    valuation: '$820M',
-                    about: 'A privately held midstream natural gas distributor and storage operator, specializing in regional networks across Texas, Louisiana, and Oklahoma. Founded in 2008, the company has expanded to operate 12 major distribution hubs.',
-                    industry: 'Energy, Natural Gas',
-                    revenue: '$362M',
-                    employees: '~1,200',
-                    hq: 'Houston, TX',
-                    tags: ['Energy', 'Natural Gas', 'Infrastructure']
+        // Data and Configuration
+        let initialCardCount = 12; // Start with 12 cards now
+        let currentCardCount = initialCardCount;
+
+        const SOURCES = {
+            RRPT: { id: 'RRPT', name: 'Region-Restricted Public Transactions', color: 'bg-red-500' },
+            IAR: { id: 'IAR', name: 'Institutional Asset Records', color: 'bg-blue-500' },
+            RNS: { id: 'RNS', name: 'Reliable News Sources', color: 'bg-green-500' },
+            MANUAL: { id: 'MANUAL', name: 'Manual Input', color: 'bg-slate-500' }
+        };
+
+        // NEW: Function to abbreviate large numbers (e.g., 210000000000 -> $210B)
+        function formatValue(num) {
+            if (num === 0) return '$0';
+            if (!num) return 'N/A';
+
+            const absNum = Math.abs(num);
+            const sign = Math.sign(num) === -1 ? '-' : '';
+            const units = [
+                { value: 1e12, symbol: 'T' },
+                { value: 1e9, symbol: 'B' },
+                { value: 1e6, symbol: 'M' },
+                { value: 1e3, symbol: 'K' }
+            ];
+
+            for (let i = 0; i < units.length; i++) {
+                if (absNum >= units[i].value) {
+                    const formatted = (absNum / units[i].value).toFixed(1);
+                    // Remove trailing .0 if present
+                    const finalFormatted = formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted;
+                    return `${sign}$${finalFormatted}${units[i].symbol}`;
                 }
-            },
+            }
+            return `${sign}$${absNum.toLocaleString()}`;
+        }
+
+        // Helper: create readable multiple-news HTML
+        function newsListHtml(newsArray) {
+            if (!newsArray || newsArray.length === 0) return '<p class="text-slate-500 italic">none available</p>';
+            return newsArray.map(n => `<p class="text-sm italic text-slate-300 leading-snug">• ${n}</p>`).join('');
+        }
+
+        // --- UPDATED People / cards DATA ---
+        // Removed string 'value' and Russian 'age' properties. Relying on sortWealth for value calculation.
+
+        const basePeopleData = [
+            // 1: Elon Musk
             {
-                type: 'individual',
-                name: 'Elise van der Meer',
-                title: 'Co-Founder & CTO, LuminaTech Analytics',
-                netWorth: '$126M',
-                breakdown: {
-                    'LuminaTech Analytics Stock (19% Stake)': '$102M',
-                    'Dutch Real Estate Holdings': '$16M',
-                    'Private Stocks & Equity': '$6.4M',
-                    'Cash & Liquid Assets': '$1.1M'
-                },
-                about: 'Elise van der Meer is a Dutch computer scientist turned entrepreneur. She co-founded LuminaTech Analytics, a data intelligence firm used by major European banks. She holds a PhD in Machine Learning from TU Delft.',
-                tags: ['Tech', 'AI', 'Entrepreneur'],
-                company: {
-                    name: 'LuminaTech Analytics',
-                    valuation: '$540M',
-                    about: 'A Netherlands-based SaaS firm developing AI-driven analytics platforms for financial services, cybersecurity, and logistics clients. Founded in 2016, the company now serves over 200 enterprise clients across Europe.',
-                    industry: 'Technology, SaaS, AI',
-                    revenue: '$74M',
-                    employees: '~420',
-                    hq: 'Amsterdam, Netherlands',
-                    tags: ['SaaS', 'Analytics', 'FinTech']
-                }
+                name: 'Elon Musk',
+                flag: '🇺🇸',
+                position: 'CEO, Tesla & SpaceX',
+                country: 'United States',
+                age: 54,
+                companies: [
+                    { name: 'Tesla Inc', value: '$720B (Market Cap)', logo: 'https://placehold.co/60x60/f43f5e/041426?text=TSLA' },
+                    { name: 'SpaceX', value: '$180B (Private Valuation)', logo: 'https://placehold.co/60x60/7c3aed/041426?text=SPX' }
+                ],
+                sources: [SOURCES.IAR, SOURCES.RRPT, SOURCES.RNS],
+                news: [
+                    'RNS: Starship launch delays impact short-term investment sentiment.',
+                    'RRPT: Sale of $1.5B in stock options filed on Tuesday.',
+                    'IAR: SEC filings show increased institutional ownership.'
+                ],
+                notes: 'Primary wealth derived from public stock holdings; value is highly volatile.',
+                image: 'https://placehold.co/100x100/fde047/041426?text=E+M',
+                sortWealth: 210000000000
             },
+            // 2: Jeff Bezos
             {
-                type: 'individual',
-                name: 'Michael Donahue',
-                title: 'Private Investor & Chairman, Stratacore Capital',
-                netWorth: '$1.34B',
-                breakdown: {
-                    'Stratacore Capital Holdings (58% Stake)': '$980M',
-                    'East Coast Real Estate': '$245M',
-                    'Private Stocks & Equity': '$88M',
-                    'Cash & Liquid Assets': '$27M'
-                },
-                about: 'Michael Donahue is an American financier and investor, known for building Stratacore Capital into one of the fastest-growing private equity firms in New York. He previously worked at Goldman Sachs before founding his own firm.',
-                tags: ['Private Equity', 'Finance', 'Real Estate'],
-                company: {
-                    name: 'Stratacore Capital',
-                    valuation: '$1.7B',
-                    about: 'A mid-market private equity firm focused on technology acquisitions, distressed retail turnarounds, and healthcare services. Founded in 2012, the firm has completed over 60 acquisitions with a total enterprise value exceeding $12B.',
-                    industry: 'Private Equity, Finance',
-                    revenue: '$450M',
-                    employees: '~310',
-                    hq: 'New York, NY',
-                    tags: ['Finance', 'Private Equity', 'Investment']
-                }
+                name: 'Jeff Bezos',
+                flag: '🇺🇸',
+                position: 'Executive Chairman, Amazon',
+                country: 'United States',
+                age: 61,
+                companies: [
+                    { name: 'Amazon', value: '$1.8T (Market Cap)', logo: 'https://placehold.co/60x60/f97316/041426?text=AMZN' },
+                    { name: 'Blue Origin', value: '$25B (Est. Private Valuation)', logo: 'https://placehold.co/60x60/60a5fa/041426?text=BO' }
+                ],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: [
+                    'RNS: Bezos Foundation pledges $100M to climate initiatives.',
+                    'IAR: Regulatory filing shows Q3/Q4 stock sales pattern.',
+                ],
+                notes: 'Significant assets in real estate and private investments not fully accounted for.',
+                image: 'https://placehold.co/100x100/fde047/041426?text=J+B',
+                sortWealth: 165000000000
             },
+            // 3: Lars Bergström (Originally #15)
             {
-                type: 'individual',
-                name: 'Nikita Suzuki',
-                title: 'Founder & CEO, TONALIQ',
-                netWorth: '$1.59M',
-                breakdown: {
-                    'TONALIQ Insurance Stock (10% Stake)': '$844k',
-                    'Index Acquisition Partnerships': '$421k',
-                    'Private Stocks & Equity': '$268k',
-                    'Cash & Liquid Assets': '$55k'
-                },
-                about: 'Nikita Suzuki is a Bahraini-Japanese entrepreneur who pioneered TONALIQ, one of the first hybrid-model Takaful vehicle insurance companies in Bahrain. She previously worked in the insurance sector for 8 years before launching her venture.',
-                tags: ['Insurance', 'Entrepreneur', 'Takaful'],
-                company: {
-                    name: 'TONALIQ Insurance',
-                    valuation: 'Undisclosed',
-                    about: 'A privately owned hybrid-model vehicle insurance provider operating under Takaful standards, focused on young drivers and mid-market vehicles. Founded in 2024, the company has already secured partnerships with 3 major dealership networks.',
-                    industry: 'Vehicle Insurance',
-                    revenue: 'Unknown',
-                    employees: '20+',
-                    hq: 'Manama, Bahrain',
-                    tags: ['Vehicle Insurance', 'Takaful', 'Fintech']
-                }
+                name: 'Lars Bergström',
+                flag: '🇸🇪',
+                position: 'CEO, Nordic SafeBank',
+                country: 'Sweden',
+                age: 62,
+                companies: [{ name: 'Nordic SafeBank', value: '$1.1B (institutional)', logo: 'https://placehold.co/60x60/0ea5a4/041426?text=NS' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: Nordic SafeBank reports strong deposit growth quarter-over-quarter.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/0ea5a4/041426?text=L+B',
+                sortWealth: 420000000
             },
+            // 4: Owen Clarke (Originally #18)
             {
-                type: 'individual',
-                name: 'David Moretti',
-                title: 'Private Investor & Chairman, VerdePort Logistics',
-                netWorth: '$462M',
-                breakdown: {
-                    'VerdePort Logistics Stock (62% Stake)': '$331M',
-                    'European Commercial Real Estate': '$89M',
-                    'Private Stocks & Equity': '$37M',
-                    'Cash & Liquid Assets': '$5M'
-                },
-                about: 'David Moretti is an Italian investor based in Milan, specializing in infrastructure and logistics ventures. He became chairman of VerdePort Logistics after acquiring a majority stake in 2017. He holds an MBA from Bocconi University.',
-                tags: ['Logistics', 'Infrastructure', 'Investor'],
-                company: {
-                    name: 'VerdePort Logistics',
-                    valuation: '$530M',
-                    about: 'An Italian logistics and port operations company with a focus on intermodal transport and Mediterranean shipping hubs. Established in 2004, VerdePort now manages terminals across Italy, Greece, and Croatia, handling over 2 million TEUs annually.',
-                    industry: 'Logistics & Shipping',
-                    revenue: '$212M',
-                    employees: '~1,800',
-                    hq: 'Milan, Italy',
-                    tags: ['Logistics', 'Shipping', 'Infrastructure']
-                }
+                name: 'Owen Clarke',
+                flag: '🇬🇧',
+                position: 'CEO, Riverbridge Capital',
+                country: 'United Kingdom',
+                age: 48,
+                companies: [{ name: 'Riverbridge Capital', value: '$3.2B (AUM)', logo: 'https://placehold.co/60x60/7c3aed/041426?text=RC' }],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: ['RNS: Riverbridge launches new green infrastructure fund.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/7c3aed/041426?text=O+C',
+                sortWealth: 210800000
             },
+            // 5: Sophie Dubois (Originally #6)
             {
-                type: 'individual',
-                name: 'Amina El-Farouq',
-                title: 'Co-Founder, NovaPhage Biotech',
-                netWorth: '$87.4M',
-                breakdown: {
-                    'NovaPhage Biotech Stock (28% Stake)': '$65M',
-                    'Dubai Real Estate Holdings': '$16.2M',
-                    'Private Stocks & Equity': '$5.6M',
-                    'Cash & Liquid Assets': '$600k'
-                },
-                about: 'Amina El-Farouq is an Egyptian biomedical entrepreneur, known for co-founding NovaPhage Biotech, a startup specializing in bacteriophage-based alternatives to antibiotics. She holds a PhD in Microbiology from Cairo University.',
-                tags: ['Biotech', 'Entrepreneur', 'HealthTech'],
-                company: {
-                    name: 'NovaPhage Biotech',
-                    valuation: '$230M',
-                    about: 'A biomedical startup pioneering bacteriophage research and therapies as alternatives to antibiotics, focusing on Middle Eastern and European markets. Founded in 2020, the company has secured $85M in venture funding and is currently in Phase II clinical trials.',
-                    industry: 'Biotechnology, Pharmaceuticals',
-                    revenue: '$12M',
-                    employees: '~140',
-                    hq: 'Dubai, UAE',
-                    tags: ['Biotechnology', 'Healthcare', 'Pharmaceuticals']
-                }
+                name: 'Sophie Dubois',
+                flag: '🇫🇷',
+                position: 'VC Partner, Orsay Capital',
+                country: 'France',
+                age: 41,
+                companies: [{ name: 'Orsay Capital', value: '$1.9B (fund AUM - not personal)', logo: 'https://placehold.co/60x60/60a5fa/041426?text=OC' }],
+                sources: [SOURCES.IAR, SOURCES.RRPT],
+                news: ['Orsay Capital backs AI logistics startup (RNS)', 'Interview in La Tribune: on climate tech investing.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=S+D',
+                sortWealth: 120500000
             },
+            // 6: Tariq Al-Mansouri (Originally #7)
             {
-                type: 'individual',
-                name: 'Sophia Rodriguez',
-                title: 'CEO, VerdeGro Farms',
-                netWorth: '$312M',
-                breakdown: {
-                    'VerdeGro Farms Stock (45% Stake)': '$215M',
-                    'Agricultural Land Holdings': '$78M',
-                    'Private Stocks & Equity': '$15M',
-                    'Cash & Liquid Assets': '$4M'
-                },
-                about: 'Sophia Rodriguez transformed her family\'s traditional farming business into a leading organic produce supplier. Under her leadership, VerdeGro Farms expanded from regional distribution to international exports.',
-                tags: ['Agriculture', 'Organic', 'Sustainability'],
-                company: {
-                    name: 'VerdeGro Farms',
-                    valuation: '$480M',
-                    about: 'A vertically integrated organic farming company specializing in sustainable agriculture practices. Founded in 1995, the company now operates across 12 states and exports to 15 countries.',
-                    industry: 'Agriculture, Organic Food',
-                    revenue: '$185M',
-                    employees: '~850',
-                    hq: 'Salinas, CA',
-                    tags: ['Agriculture', 'Organic', 'Sustainability']
-                }
+                name: 'Tariq Al-Mansouri',
+                flag: '🇦🇪',
+                position: 'Managing Director, GulfBridge Real Estate',
+                country: 'UAE',
+                age: 55,
+                companies: [{ name: 'GulfBridge REIT', value: '$41.3M', logo: 'https://placehold.co/60x60/f97316/041426?text=GB' }],
+                sources: [SOURCES.RRPT, SOURCES.RNS],
+                news: ['GulfBridge announces luxury hotel conversion (RNS)', 'RRPT: acquisition of Abu Dhabi site completed.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/f97316/041426?text=T+A',
+                sortWealth: 78200000
             },
+            // 7: Mateo Alvarez (Originally #16)
             {
-                type: 'individual',
-                name: 'James Chen',
-                title: 'Founder & CEO, NeuroSync Technologies',
-                netWorth: '$890M',
-                breakdown: {
-                    'NeuroSync Technologies Stock (32% Stake)': '$710M',
-                    'Silicon Valley Real Estate': '$125M',
-                    'Private Stocks & Equity': '$48M',
-                    'Cash & Liquid Assets': '$7M'
-                },
-                about: 'James Chen is a Stanford graduate who founded NeuroSync Technologies after his research on brain-computer interfaces. The company has revolutionized how we interact with technology through neural signals.',
-                tags: ['Neurotech', 'AI', 'Entrepreneur'],
-                company: {
-                    name: 'NeuroSync Technologies',
-                    valuation: '$2.2B',
-                    about: 'A neurotechnology company developing non-invasive brain-computer interfaces for consumer and medical applications. Founded in 2018, the company has secured over $300M in funding and holds 47 patents.',
-                    industry: 'Neurotechnology, AI',
-                    revenue: '$320M',
-                    employees: '~620',
-                    hq: 'Palo Alto, CA',
-                    tags: ['Neurotech', 'AI', 'Healthcare']
-                }
+                name: 'Mateo Alvarez',
+                flag: '🇨🇱',
+                position: 'Founder, Andes Mining & Metals',
+                country: 'Chile',
+                age: 59,
+                companies: [{ name: 'Andes Mining', value: '$55.6M', logo: 'https://placehold.co/60x60/eab308/041426?text=AM' }],
+                sources: [SOURCES.RRPT, SOURCES.RNS],
+                news: ['RNS: exploration rights extended in central region', 'RRPT: sale of processing plant finalized.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/eab308/041426?text=M+A',
+                sortWealth: 65400000
             },
+            // 8: Lina Chen (Originally #10)
             {
-                type: 'individual',
+                name: 'Lina Chen',
+                flag: '🇨🇳',
+                position: 'Founder, Peony Biotech',
+                country: 'China',
+                age: 46,
+                companies: [
+                    { name: 'Peony Biotech', value: '$22.7M', logo: 'https://placehold.co/60x60/a78bfa/041426?text=PB' },
+                    { name: 'Shanghai Med Lab', value: '$31.1M', logo: 'https://placehold.co/60x60/60a5fa/041426?text=SML' }
+                ],
+                sources: [SOURCES.RRPT, SOURCES.RNS],
+                news: ['Peony Biotech completes Series B extension (RRPT)', 'RNS: Peony partners with hospital network.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/a78bfa/041426?text=L+C',
+                sortWealth: 53800000
+            },
+            // 9: Amira El-Khoury (Originally #4)
+            {
+                name: 'Amira El-Khoury',
+                flag: '🇱🇧',
+                position: 'Chairperson, Levante Foods & Holdings',
+                country: 'Lebanon',
+                age: 38,
+                companies: [
+                    { name: 'Levante Foods', value: '$18.2M', logo: 'https://placehold.co/60x60/f43f5e/041426?text=LF' },
+                    { name: 'Beirut Real Estate SPV', value: '$24.1M', logo: 'https://placehold.co/60x60/7c3aed/041426?text=BR' }
+                ],
+                sources: [SOURCES.RRPT, SOURCES.RNS],
+                news: [
+                    'RNS: Levante Foods signs distribution deal across GCC (RNS)',
+                    'Local press: El-Khoury invests in a coastal redevelopment project.',
+                ],
+                notes: '',
+                image: 'https://placehold.co/100x100/f43f5e/041426?text=A+E',
+                sortWealth: 42300000
+            },
+            // 10: Marcus Bauer (Originally #44)
+            {
+                name: 'Marcus Bauer',
+                flag: '🇩🇪',
+                position: 'Founder, Berlin Mobility Systems',
+                country: 'Germany',
+                age: 36,
+                companies: [{ name: 'Berlin Mobility Systems', value: '$21.4M', logo: 'https://placehold.co/60x60/7c3aed/041426?text=BM' }],
+                sources: [SOURCES.RRPT, SOURCES.IAR],
+                news: ['RRPT: municipal contract for micro-mobility fleet awarded.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/7c3aed/041426?text=M+B',
+                sortWealth: 33000000
+            },
+            // 11: Hannah Parker (Originally #25)
+            {
+                name: 'Hannah Parker',
+                flag: '🇺🇸',
+                position: 'Founder, Ember Education (edtech)',
+                country: 'United States',
+                age: 29,
+                companies: [{ name: 'Ember Education', value: '$25.6M', logo: 'https://placehold.co/60x60/60a5fa/041426?text=EE' }],
+                sources: [SOURCES.RRPT, SOURCES.RNS],
+                news: ['RNS: Ember Education announces international licensing deals.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=H+P',
+                sortWealth: 31500000
+            },
+            // 12: Elena García (Originally #36)
+            {
+                name: 'Elena García',
+                flag: '🇲🇽',
+                position: 'Head, Yucatán Resorts',
+                country: 'Mexico',
+                age: 51,
+                companies: [{ name: 'Yucatán Resorts', value: '$11.7M', logo: 'https://placehold.co/60x60/0ea5a4/041426?text=YR' }],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: ['IAR: resort financing completed; RNS feature on tourism rebound.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/0ea5a4/041426?text=E+G',
+                sortWealth: 27500000
+            },
+            // 13: Katarzyna Nowak (Originally #21)
+            {
+                name: 'Katarzyna Nowak',
+                flag: '🇵🇱',
+                position: 'CEO, Warsaw Clean Energy',
+                country: 'Poland',
+                age: 44,
+                companies: [{ name: 'Warsaw Clean Energy', value: '$8.4M', logo: 'https://placehold.co/60x60/60a5fa/041426?text=WCE' }],
+                sources: [SOURCES.RRPT],
+                news: ['RRPT: multi-megawatt wind project financing announced.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=K+N',
+                sortWealth: 22700000
+            },
+            // 14: Petra Novak (Originally #14)
+            {
+                name: 'Petra Novak',
+                flag: '🇨🇿',
+                position: 'Managing Partner, Bohemia Venture Partners',
+                country: 'Czechia',
+                age: 40,
+                companies: [{ name: 'Bohemia VP', value: '$250M (fund AUM - not personal)', logo: 'https://placehold.co/60x60/94a3b8/041426?text=BP' }],
+                sources: [SOURCES.RRPT, SOURCES.IAR],
+                news: ['RRPT: fund II final close announced', 'Profile in CETIN business monthly.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/94a3b8/041426?text=P+N',
+                sortWealth: 18500000
+            },
+            // 15: Zoé Martin (Originally #32)
+            {
+                name: 'Zoé Martin',
+                flag: '🇨🇦',
+                position: 'Co-founder, Northern Green Solutions',
+                country: 'Canada',
+                age: 33,
+                companies: [{ name: 'Northern Green', value: '$12.3M', logo: 'https://placehold.co/60x60/60a5fa/041426?text=NG' }],
+                sources: [SOURCES.RRPT, SOURCES.IAR],
+                news: ['RRPT: renewable certificate program participation announced.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=Z+M',
+                sortWealth: 16700000
+            },
+            // 16: Jinsoo Park (Originally #27)
+            {
+                name: 'Jinsoo Park',
+                flag: '🇰🇷',
+                position: 'CTO, Seoul Circuit Systems',
+                country: 'South Korea',
+                age: 49,
+                companies: [{ name: 'Seoul Circuit Systems', value: 'KRW 18.2B (converted to USD)', logo: 'https://placehold.co/60x60/0ea5a4/041426?text=SCS' }],
+                sources: [SOURCES.RRPT],
+                news: ['RRPT: Seoul Circuit wins three-year supply contract in APAC.'],
+                notes: 'Converted to USD using latest conversion rate at source.',
+                image: 'https://placehold.co/100x100/0ea5a4/041426?text=J+P',
+                sortWealth: 14600000
+            },
+            // 17: Mikhail Ivanov (Originally #24)
+            {
+                name: 'Mikhail Ivanov',
+                flag: '🇷🇺',
+                position: 'Investor, Volga Holdings',
+                country: 'Russia',
+                age: 52,
+                companies: [{ name: 'Volga Holdings', value: '$7.5M', logo: 'https://placehold.co/60x60/94a3b8/041426?text=VH' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: 'Private asset valuations from manual reporting.',
+                image: 'https://placehold.co/100x100/94a3b8/041426?text=M+I',
+                sortWealth: 12000000
+            },
+            // 18: Helena Martins (Originally #30)
+            {
+                name: 'Helena Martins',
+                flag: '🇵🇹',
+                position: 'Head, Algarve Renewable Energies',
+                country: 'Portugal',
+                age: 47,
+                companies: [{ name: 'Algarve Renewables', value: '$9.1M', logo: 'https://placehold.co/60x60/7c3aed/041426?text=AR' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: funding round closed for offshore testing facility.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/7c3aed/041426?text=H+M',
+                sortWealth: 11900000
+            },
+            // 19: Yusuf Al-Sayed (Originally #42)
+            {
+                name: 'Yusuf Al-Sayed',
+                flag: '🇸🇦',
+                position: 'Founder, Medina Agro Processing',
+                country: 'Saudi Arabia',
+                age: 39,
+                companies: [{ name: 'Medina Agro', value: '$7.2M', logo: 'https://placehold.co/60x60/eab308/041426?text=MA' }],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: ['IAR: new processing line permits issued; RNS: export to GCC market reported.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/eab308/041426?text=Y+A',
+                sortWealth: 9940000
+            },
+            // 20: Diego Marquez (Originally #5)
+            {
+                name: 'Diego Marquez',
+                flag: '🇲🇽',
+                position: 'Founder, Cielo Verde Renewable',
+                country: 'Mexico',
+                age: 35,
+                companies: [
+                    { name: 'Cielo Verde Renewable', value: '$6.4M', logo: 'https://placehold.co/60x60/10b981/041426?text=CV' },
+                    { name: 'Marquez Farms (agri-tech)', value: '$3.35M', logo: 'https://placehold.co/60x60/f59e0b/041426?text=MF' }
+                ],
+                sources: [SOURCES.IAR, SOURCES.MANUAL],
+                news: [
+                    'RNS: PV plant procurement deal with government utility.',
+                    'none available'
+                ],
+                notes: '',
+                image: 'https://placehold.co/100x100/10b981/041426?text=D+M',
+                sortWealth: 9750000
+            },
+            // 21: Haruto Tanaka (Originally #11)
+            {
+                name: 'Haruto Tanaka',
+                flag: '🇯🇵',
+                position: 'Chairman, Kyoto Microelectronics',
+                country: 'Japan',
+                age: 65,
+                companies: [{ name: 'Kyoto Microelectronics', value: '¥900M (converted to USD)', logo: 'https://placehold.co/60x60/60a5fa/041426?text=KM' }],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: ['RNS: microchip supply partnership with Singapore firm', 'IAR: export license renewed.'],
+                notes: 'Converted to USD using latest conversion rate at source.',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=H+T',
+                sortWealth: 8900000
+            },
+            // 22: Adele Mbatha (Originally #38)
+            {
+                name: 'Adele Mbatha',
+                flag: '🇿🇦',
+                position: 'CEO, Cape Fintech',
+                country: 'South Africa',
+                age: 31,
+                companies: [{ name: 'Cape Fintech', value: 'ZAR 150M (converted to USD)', logo: 'https://placehold.co/60x60/10b981/041426?text=CF' }],
+                sources: [SOURCES.RNS],
+                news: ['RNS: Cape Fintech expands to two new African markets.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/10b981/041426?text=A+M',
+                sortWealth: 7900000
+            },
+            // 23: Olga Petrov (Originally #8, age removed)
+            {
+                name: 'Olga Petrov',
+                flag: '🇷🇺',
+                position: 'Co-founder, NorthSea Marine Engineering',
+                country: 'Russia',
+                age: 43,
+                companies: [{ name: 'NorthSea ME', value: '$2.7M', logo: 'https://placehold.co/60x60/94a3b8/041426?text=NM' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: 'Manual estimate; limited public filings.',
+                image: 'https://placehold.co/100x100/94a3b8/041426?text=O+P',
+                sortWealth: 6900000
+            },
+            // 24: Lucas Pereira (Originally #22)
+            {
+                name: 'Lucas Pereira',
+                flag: '🇧🇷',
+                position: 'Founder, Amazonia Logistics',
+                country: 'Brazil',
+                age: 58,
+                companies: [{ name: 'Amazonia Logistics', value: 'R$ 32M (converted to USD)', logo: 'https://placehold.co/60x60/eab308/041426?text=AL' }],
+                sources: [SOURCES.MANUAL, SOURCES.RNS],
+                news: ['RNS: partnership announced with river transport operator.', 'none available'],
+                notes: 'Converted to USD using latest conversion rate at time of estimate.',
+                image: 'https://placehold.co/100x100/eab308/041426?text=L+P',
+                sortWealth: 6600000
+            },
+            // 25: Oskar Jansson (Originally #39)
+            {
+                name: 'Oskar Jansson',
+                flag: '🇫🇮',
+                position: 'Founder, Arctic Data Storage',
+                country: 'Finland',
+                age: 30,
+                companies: [{ name: 'Arctic Data Storage', value: '$4.5M', logo: 'https://placehold.co/60x60/60a5fa/041426?text=AD' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: new cold-storage facility announced for secure data archiving.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=O+J',
+                sortWealth: 6350000
+            },
+            // 26: Vladimir Novak (Originally #31)
+            {
+                name: 'Vladimir Novak',
+                flag: '🇨🇿',
+                position: 'Founder, Prague DataWorks',
+                country: 'Czechia',
+                age: 45,
+                companies: [{ name: 'Prague DataWorks', value: '$4.2M', logo: 'https://placehold.co/60x60/94a3b8/041426?text=PD' }],
+                sources: [SOURCES.RNS],
+                news: ['RNS: Prague DataWorks to open office in Vienna.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/94a3b8/041426?text=V+N',
+                sortWealth: 5700000
+            },
+            // 27: Arman Karimov (Originally #29)
+            {
+                name: 'Arman Karimov',
+                flag: '🇺🇿',
+                position: 'Founder, Silk Road Logistics',
+                country: 'Uzbekistan',
+                age: 37,
+                companies: [{ name: 'Silk Road Logistics', value: '$2.9M', logo: 'https://placehold.co/60x60/eab308/041426?text=SR' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: '',
+                image: 'https://placehold.co/100x100/eab308/041426?text=A+K',
+                sortWealth: 4500000
+            },
+            // 28: Isabella Rossi (Originally #12)
+            {
                 name: 'Isabella Rossi',
-                title: 'Founder, Artisan Collective',
-                netWorth: '$58M',
-                breakdown: {
-                    'Artisan Collective Stock (100% Stake)': '$42M',
-                    'Luxury Retail Properties': '$12M',
-                    'Private Stocks & Equity': '$3M',
-                    'Cash & Liquid Assets': '$1M'
-                },
-                about: 'Isabella Rossi created Artisan Collective to connect traditional craftspeople with global luxury markets. Her platform has preserved endangered crafts while creating sustainable livelihoods for artisans worldwide.',
-                tags: ['Luxury Goods', 'E-commerce', 'Social Enterprise'],
-                company: {
-                    name: 'Artisan Collective',
-                    valuation: '$42M',
-                    about: 'An e-commerce platform and retail brand that partners with traditional artisans from over 40 countries. Founded in 2015, the company has grown to include 12 physical boutiques and serves customers in 75 countries.',
-                    industry: 'Luxury Goods, E-commerce',
-                    revenue: '$28M',
-                    employees: '~120',
-                    hq: 'Florence, Italy',
-                    tags: ['Luxury Goods', 'E-commerce', 'Social Enterprise']
-                }
+                flag: '🇮🇹',
+                position: 'Founder, Rossi Atelier (fashion)',
+                country: 'Italy',
+                age: 26,
+                companies: [{ name: 'Rossi Atelier', value: '$3.1M', logo: 'https://placehold.co/60x60/fb7185/041426?text=RA' }],
+                sources: [SOURCES.RNS, SOURCES.MANUAL],
+                news: ['RNS: Rossi Atelier opens second flagship in Milan', 'Local style magazine feature.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/fb7185/041426?text=I+R',
+                sortWealth: 4250000
             },
+            // 29: Anya Kovács (Originally #17)
             {
-                type: 'individual',
-                name: 'Marcus Thorne',
-                title: 'Managing Partner, Apex Venture Partners',
-                netWorth: '$1.2B',
-                breakdown: {
-                    'Apex Venture Partners Holdings': '$850M',
-                    'Global Real Estate Portfolio': '$280M',
-                    'Private Stocks & Equity': '$62M',
-                    'Cash & Liquid Assets': '$8M'
-                },
-                about: 'Marcus Thorne is a legendary venture capitalist known for early investments in multiple unicorn startups. He founded Apex Venture Partners after a successful career as a technology executive.',
-                tags: ['Venture Capital', 'Tech', 'Investor'],
-                company: {
-                    name: 'Apex Venture Partners',
-                    valuation: '$4.5B',
-                    about: 'A premier venture capital firm focusing on early-stage technology companies across sectors including AI, biotech, and clean energy. Since its founding in 2005, the firm has backed 12 companies that achieved IPOs.',
-                    industry: 'Venture Capital, Finance',
-                    revenue: '$680M',
-                    employees: '~85',
-                    hq: 'San Francisco, CA',
-                    tags: ['Venture Capital', 'Tech', 'Investment']
-                }
+                name: 'Anya Kovács',
+                flag: '🇭🇺',
+                position: 'Co-founder, Budapest BioLabs',
+                country: 'Hungary',
+                age: 28,
+                companies: [{ name: 'Budapest BioLabs', value: 'HUF 1.1B (converted to USD)', logo: 'https://placehold.co/60x60/60a5fa/041426?text=BB' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: 'Reported in HUF and converted to USD at source estimate.',
+                image: 'https://placehold.co/100x100/60a5fa/041426?text=A+K',
+                sortWealth: 3900000
+            },
+            // 30: Aisha Khan (Originally #23)
+            {
+                name: 'Aisha Khan',
+                flag: '🇵🇰',
+                position: 'CEO, Karakoram Microfinance',
+                country: 'Pakistan',
+                age: 34,
+                companies: [{ name: 'Karakoram Microfinance', value: '$2.1M', logo: 'https://placehold.co/60x60/f97316/041426?text=KM' }],
+                sources: [SOURCES.IAR, SOURCES.RNS],
+                news: ['IAR: microfinance portfolio reaches 55k active clients', 'RNS local: new rural branch opened.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/f97316/041426?text=A+K',
+                sortWealth: 3450000
+            },
+            // 31: Ravi Shankar (Originally #33)
+            {
+                name: 'Ravi Shankar',
+                flag: '🇮🇳',
+                position: 'Founder, Mumbai Microgrids',
+                country: 'India',
+                age: 41,
+                companies: [{ name: 'Mumbai Microgrids', value: '₹240M (converted to USD)', logo: 'https://placehold.co/60x60/f59e0b/041426?text=MM' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: pilot microgrid project expanded to two neighborhoods.'],
+                notes: 'Converted to USD using latest conversion at time of reporting.',
+                image: 'https://placehold.co/100x100/f59e0b/041426?text=R+S',
+                sortWealth: 3250000
+            },
+            // 32: Ibrahim Farouk (Originally #20)
+            {
+                name: 'Ibrahim Farouk',
+                flag: '🇪🇬',
+                position: 'Founder, Nile AgroTech',
+                country: 'Egypt',
+                age: 30,
+                companies: [{ name: 'Nile AgroTech', value: '$1.9M', logo: 'https://placehold.co/60x60/34d399/041426?text=NA' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: Nile AgroTech awarded regional grant for irrigation tech.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/34d399/041426?text=I+F',
+                sortWealth: 2900000
+            },
+            // 33: Tomáš Kral (Originally #37)
+            {
+                name: 'Tomáš Kral',
+                flag: '🇸🇰',
+                position: 'Founder, Bratislava AI Labs',
+                country: 'Slovakia',
+                age: 27,
+                companies: [{ name: 'Bratislava AI Labs', value: '€1.9M (converted to USD)', logo: 'https://placehold.co/60x60/7c3aed/041426?text=BA' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: 'Conversion to USD noted.',
+                image: 'https://placehold.co/100x100/7c3aed/041426?text=T+K',
+                sortWealth: 2700000
+            },
+            // 34: Camila Alvarez (Originally #43)
+            {
+                name: 'Camila Alvarez',
+                flag: '🇦🇷',
+                position: 'Director, Patagonia Outfitters',
+                country: 'Argentina',
+                age: 40,
+                companies: [{ name: 'Patagonia Outfitters', value: 'ARS 180M (converted to USD)', logo: 'https://placehold.co/60x60/fb7185/041426?text=PO' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: 'Converted to USD at time of estimate.',
+                image: 'https://placehold.co/100x100/fb7185/041426?text=C+A',
+                sortWealth: 2400000
+            },
+            // 35: Kwame Mensah (Originally #9)
+            {
+                name: 'Kwame Mensah',
+                flag: '🇬🇭',
+                position: 'CEO, Adom Digital Finance',
+                country: 'Ghana',
+                age: 32,
+                companies: [{ name: 'Adom Digital Finance', value: '$1.7M', logo: 'https://placehold.co/60x60/34d399/041426?text=AD' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: Adom secures micro-lending license expansion across two regions.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/34d399/041426?text=K+M',
+                sortWealth: 2200000
+            },
+            // 36: Fahim Khan (Originally #35)
+            {
+                name: 'Fahim Khan',
+                flag: '🇧🇩',
+                position: 'Founder, Dhaka Clothing Co.',
+                country: 'Bangladesh',
+                age: 28,
+                companies: [{ name: 'Dhaka Clothing Co.', value: '$1.05M', logo: 'https://placehold.co/60x60/f97316/041426?text=DC' }],
+                sources: [SOURCES.RNS, SOURCES.MANUAL],
+                news: ['RNS: Dhaka Clothing Co. lands a European retail contract.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/f97316/041426?text=F+K',
+                sortWealth: 1800000
+            },
+            // 37: Efe Olatunji (Originally #13)
+            {
+                name: 'Efe Olatunji',
+                flag: '🇳🇬',
+                position: 'Co-CEO, Lagos AgroShift',
+                country: 'Nigeria',
+                age: 25,
+                companies: [{ name: 'AgroShift', value: '$1.2M', logo: 'https://placehold.co/60x60/f59e0b/041426?text=AS' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: AgroShift pilot program wins government sustainability grant.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/f59e0b/041426?text=E+O',
+                sortWealth: 1750000
+            },
+            // 38: Nikita Suzuki (Originally #3, updated company case)
+            {
+                name: 'Nikita Suzuki',
+                flag: '🇧🇭',
+                position: 'Founder & CEO, MARLNAJ INSURANCE',
+                country: 'Bahrain',
+                age: 16,
+                companies: [
+                    { name: 'MARLNAJ INSURANCE', value: '$1,180,000 revenue / est.', logo: 'https://placehold.co/60x60/06b6d4/041426?text=MN' }
+                ],
+                sources: [SOURCES.IAR, SOURCES.RRPT],
+                news: [
+                    'Local business profile: “Teen CEO Nikita Suzuki scales MARLNAJ INSURANCE to $1.18M annual revenue.” (IAR)',
+                    'Regional RRPT filing: MARLNAJ registers new small-business insurance product in Bahrain.',
+                    'Community spotlight: local school awards to young entrepreneur (none financial).'
+                ],
+                notes: 'Values provided in USD by source (IAR/RRPT) and used directly.',
+                image: 'https://placehold.co/100x100/06b6d4/041426?text=N+S',
+                sortWealth: 1400000
+            },
+            // 39: Samuel Kiplagat (Originally #41)
+            {
+                name: 'Samuel Kiplagat',
+                flag: '🇰🇪',
+                position: 'Director, Rift Valley Greenhouses',
+                country: 'Kenya',
+                age: 48,
+                companies: [{ name: 'Rift Valley Greenhouses', value: '$980k', logo: 'https://placehold.co/60x60/10b981/041426?text=RV' }],
+                sources: [SOURCES.RRPT],
+                news: ['RRPT: export permit approved for selected crops.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/10b981/041426?text=S+K',
+                sortWealth: 1320000
+            },
+            // 40: Sofia Alvarez (Originally #19)
+            {
+                name: 'Sofia Alvarez',
+                flag: '🇪🇸',
+                position: 'Creative Director, La Casa Media',
+                country: 'Spain',
+                age: 23,
+                companies: [{ name: 'La Casa Media', value: '$680k', logo: 'https://placehold.co/60x60/fb7185/041426?text=LC' }],
+                sources: [SOURCES.RNS],
+                news: ['RNS: new streaming deal signed with Iberian broadcaster.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/fb7185/041426?text=S+A',
+                sortWealth: 1250000
+            },
+            // 41: Nadia Petrovna (Originally #34, age removed)
+            {
+                name: 'Nadia Petrovna',
+                flag: '🇷🇺',
+                position: 'Director, Urals Textiles',
+                country: 'Russia',
+                age: 38,
+                companies: [{ name: 'Urals Textiles', value: '$750k', logo: 'https://placehold.co/60x60/94a3b8/041426?text=UT' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: '',
+                image: 'https://placehold.co/100x100/94a3b8/041426?text=N+P',
+                sortWealth: 1100000
+            },
+            // 42: Mariana Ferreira (Originally #28)
+            {
+                name: 'Mariana Ferreira',
+                flag: '🇵🇹',
+                position: 'Founder, Porto Design House',
+                country: 'Portugal',
+                age: 29,
+                companies: [{ name: 'Porto Design House', value: '$700k', logo: 'https://placehold.co/60x60/fb7185/041426?text=PD' }],
+                sources: [SOURCES.RNS, SOURCES.MANUAL],
+                news: ['RNS: award for best new European design house.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/fb7185/041426?text=M+F',
+                sortWealth: 980000
+            },
+            // 43: Nuru Mwangi (Originally #26)
+            {
+                name: 'Nuru Mwangi',
+                flag: '🇰🇪',
+                position: 'CEO, Mombasa Blue Fisheries',
+                country: 'Kenya',
+                age: 27,
+                companies: [{ name: 'Mombasa Blue Fisheries', value: '$600k', logo: 'https://placehold.co/60x60/10b981/041426?text=MB' }],
+                sources: [SOURCES.IAR],
+                news: ['IAR: sustainable fishing certification achieved.'],
+                notes: '',
+                image: 'https://placehold.co/100x100/10b981/041426?text=N+M',
+                sortWealth: 850000
+            },
+            // 44: Yara Haddad (Originally #40)
+            {
+                name: 'Yara Haddad',
+                flag: '🇱🇧',
+                position: 'Founder, Cedar Health (pharma distribution)',
+                country: 'Lebanon',
+                age: 31,
+                companies: [{ name: 'Cedar Health', value: '$500k', logo: 'https://placehold.co/60x60/f97316/041426?text=CH' }],
+                sources: [SOURCES.MANUAL],
+                news: ['none available'],
+                notes: '',
+                image: 'https://placehold.co/100x100/f97316/041426?text=Y+H',
+                sortWealth: 680000
             }
         ];
 
-        function getInitials(name) {
-            const parts = name.split(' ');
-            if (parts.length > 1) {
-                return parts[0][0] + parts[parts.length - 1][0];
-            }
-            return parts[0].substring(0, 2);
+        let peopleData = [...basePeopleData]; // Use a mutable copy for sorting
+
+        // Helper Functions
+        function escapeHtml(str) {
+            return str.replace(/"/g, '&quot;');
         }
 
-        function createProfileCard(profile) {
-            const cardHtml = `
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="https://placehold.co/80x80/DAB76D/1A2942?text=${getInitials(profile.name)}" alt="${profile.name} Photo">
-                        <div>
-                            <h3>${profile.name}</h3>
-                            <p style="font-size: 0.9em; color: #777; margin: 0;">${profile.title}</p>
-                        </div>
-                        <div class="net-worth">
-                            <span class="label">Estimated Net Worth</span>
-                            <div class="value">${profile.netWorth}</div>
-                        </div>
-                    </div>
-                    <div class="profile-body">
-                        <h4>Net Worth Breakdown</h4>
-                        <ul class="profile-list">
-                            ${Object.entries(profile.breakdown).map(([key, value]) => `
-                                <li><span class="label">${key}:</span> <span class="value">${value}</span></li>
-                            `).join('')}
-                        </ul>
-                        <p style="margin-top: 25px;">${profile.about}</p>
-                        <div class="tags">
-                            ${profile.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-
-                    <div class="card-spacer"></div>
-
-                    <div class="profile-header">
-                        <img src="https://placehold.co/80x80/1A2942/DAB76D?text=${getInitials(profile.company.name)}" alt="${profile.company.name} Logo" style="border-radius: 8px;">
-                        <div>
-                            <h3>${profile.company.name}</h3>
-                        </div>
-                        <div class="net-worth">
-                            <span class="label">Valuation</span>
-                            <div class="value">${profile.company.valuation}</div>
-                        </div>
-                    </div>
-                    <div class="profile-body">
-                        <h4>About</h4>
-                        <p>${profile.company.about}</p>
-                        <ul class="profile-list">
-                            <li><span class="label">Industry:</span> <span class="value">${profile.company.industry}</span></li>
-                            <li><span class="label">Revenue (2024):</span> <span class="value">${profile.company.revenue}</span></li>
-                            <li><span class="label">Employees:</span> <span class="value">${profile.company.employees}</span></li>
-                            <li><span class="label">Headquarters:</span> <span class="value">${profile.company.hq}</span></li>
-                        </ul>
-                        <div class="tags">
-                            ${profile.company.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
+        function createCompanyHtml(company) {
+            if (!company) return '';
+            return `
+                <div class="flex items-center space-x-2 p-2 bg-slate-700 rounded-lg text-sm">
+                    <img src="${company.logo || 'https://placehold.co/60x60/141E30/fff?text=CO'}" alt="${company.name} logo" class="w-6 h-6 rounded-full object-cover">
+                    <div class="flex-1">
+                        <p class="font-semibold text-slate-200">${company.name}</p>
+                        <p class="text-xs text-slate-400">Value: ${company.value}</p>
                     </div>
                 </div>
             `;
-            return cardHtml;
         }
 
-        function renderProfiles(profiles) {
-            const container = document.getElementById('profile-list');
-            container.innerHTML = '';
-            if (profiles.length === 0) {
-                container.innerHTML = '<p style="text-align: center; margin-top: 50px; font-size: 1.2em; color: #888;">No profiles found. Try a different search term.</p>';
-            } else {
-                profiles.forEach(profile => {
-                    container.innerHTML += createProfileCard(profile);
+        function createPersonCard(person) {
+            const personJson = escapeHtml(JSON.stringify(person));
+            const formattedValue = formatValue(person.sortWealth); // Use new formatter
+            const companiesHtml = (person.companies || []).map(createCompanyHtml).join('');
+            const sourceDotsHtml = (person.sources || []).map(source => `
+                <div class="w-2.5 h-2.5 ${source.color} rounded-full" title="${source.name}"></div>
+            `).join('');
+            const sourceWarning = (!person.sources || person.sources.length === 0) ? `
+                <div class="text-xs text-red-400 mt-2 p-2 bg-red-900/50 rounded-lg">
+                    ⚠️ Warning: Value based on manual input. No primary source data used.
+                </div>
+            ` : '';
+
+            // Compose a short news block
+            let shortNews = 'none available';
+            let hasActualNews = person.news && person.news.filter(n => n.toLowerCase().trim() !== 'none available').length > 0;
+            if (hasActualNews) {
+                shortNews = person.news.slice(0, 3).join(' • ');
+            }
+
+            const flagHtml = person.flag ? `<span class="flag">${person.flag}</span>` : '';
+            const aiSummaryHtml = hasActualNews ? '<p class="text-xs text-slate-500 mt-1">Summarized by ✨ AI</p>' : ''; // Only show if there is news
+
+            return `
+                <div class="person-card fade-in-initial card-bg p-6 rounded-2xl shadow-xl border border-slate-700 hover:border-amber-400 transition-all duration-300 flex flex-col cursor-pointer"
+                     onclick="openModal('${personJson}')">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <img src="${person.image}" alt="${person.name}" class="w-16 h-16 rounded-full object-cover border-2 border-amber-400/50">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-slate-50">${flagHtml}${person.name}</h3>
+                            <p class="text-amber-400 font-medium text-sm">${person.position}</p>
+                            <p class="text-xs text-slate-400 mt-1">${person.country}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="text-sm uppercase tracking-wider text-slate-400">Estimated Net Worth</p>
+                        <p class="text-4xl font-extrabold text-amber-500">${formattedValue}</p>
+                        <p class="text-xs text-slate-500">accuracy varies by source</p>
+                    </div>
+
+                    <div class="mb-4 flex-1">
+                        <p class="text-sm uppercase tracking-wider text-slate-400 mb-2">Key Assets</p>
+                        <div class="space-y-2">
+                            ${companiesHtml || '<p class="text-slate-500 text-sm">No major company assets listed.</p>'}
+                        </div>
+                    </div>
+
+                    <div class="mb-4 border-t border-slate-800 pt-4">
+                        <p class="text-sm uppercase tracking-wider text-slate-400 mb-2">Relevant News (RNS)</p>
+                        <p class="text-sm italic text-slate-300 leading-snug">${shortNews}</p>
+                        ${aiSummaryHtml}
+                    </div>
+
+                    <div class="mt-auto border-t border-slate-800 pt-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs text-slate-400">Data Sources Used:</p>
+                            <div class="flex space-x-1.5">
+                                ${sourceDotsHtml}
+                                ${Array(Math.max(0, 3 - (person.sources ? person.sources.length : 0))).fill(
+                                    '<div class="w-2.5 h-2.5 bg-slate-700 rounded-full" title="Source Not Used"></div>'
+                                ).join('')}
+                            </div>
+                        </div>
+                        ${sourceWarning}
+                    </div>
+                </div>
+            `;
+        }
+
+        function applyFadeIn(containerId) {
+            setTimeout(() => {
+                document.querySelectorAll(`#${containerId} .fade-in-initial`).forEach((card, index) => {
+                    setTimeout(() => card.classList.add('ready'), index * 45);
                 });
+            }, 10);
+        }
+
+        function renderCards(count) {
+            const container = document.getElementById('cards-container');
+            const cardsToDisplay = peopleData.slice(0, count);
+
+            if (container) {
+                container.innerHTML = cardsToDisplay.map(createPersonCard).join('');
+                applyFadeIn('cards-container');
+            }
+
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            const totalCards = peopleData.length;
+
+            if (count < totalCards) {
+                loadMoreBtn.textContent = `Load More Cards (${totalCards - count} remaining)`;
+                loadMoreBtn.style.display = 'inline-block';
+            } else if (count >= totalCards && totalCards > initialCardCount) {
+                loadMoreBtn.textContent = 'Show Fewer Cards';
+                loadMoreBtn.style.display = 'inline-block';
+            } else {
+                loadMoreBtn.style.display = 'none';
             }
         }
 
-        function filterProfiles() {
-            const query = document.getElementById('main-search').value.toLowerCase().trim();
-            if (query === "") {
-                renderProfiles(profilesData);
+        function sortAndRenderCards() {
+            const sortValue = document.getElementById('sort-select').value;
+            // Always reset to base data before sorting to maintain full list
+            peopleData = [...basePeopleData];
+
+            if (sortValue === 'wealth_desc') {
+                // Sort by the numerical sortWealth property (descending), use name as tie-breaker
+                peopleData.sort((a, b) => {
+                    const wealthComparison = (b.sortWealth || 0) - (a.sortWealth || 0);
+                    if (wealthComparison !== 0) return wealthComparison;
+                    // Tie-breaker: Name (A-Z)
+                    return a.name.localeCompare(b.name);
+                });
+            } else if (sortValue === 'name_asc') {
+                // Sort by name (ascending)
+                peopleData.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            // After sorting, reset currentCardCount if we are not already showing all, and re-render.
+            currentCardCount = peopleData.length > initialCardCount ? initialCardCount : peopleData.length;
+            renderCards(currentCardCount);
+        }
+
+        function loadMore() {
+            const totalCards = peopleData.length;
+            // If currently showing initialCount, show all. If currently showing all, revert to initialCount.
+            currentCardCount = currentCardCount < totalCards ? totalCards : initialCardCount;
+            renderCards(currentCardCount);
+        }
+
+        function searchCards(searchTerm) {
+            const term = searchTerm.toLowerCase().trim();
+            const searchResultsContainer = document.getElementById('search-results-container');
+            const searchResultsSection = document.getElementById('search-results-section');
+            const popularCardsSection = document.getElementById('popular-cards-section');
+
+            if (term === '') {
+                searchResultsSection.classList.add('hidden');
+                popularCardsSection.classList.remove('hidden');
+                // Ensure popular cards reset to default view if search is cleared
+                sortAndRenderCards();
                 return;
             }
 
-            const filtered = profilesData.filter(profile => {
-                // Check individual properties
-                const individualMatch = profile.name.toLowerCase().includes(query) ||
-                                         profile.title.toLowerCase().includes(query) ||
-                                         profile.about.toLowerCase().includes(query) ||
-                                         profile.tags.some(tag => tag.toLowerCase().includes(query));
-
-                // Check company properties
-                const companyMatch = profile.company.name.toLowerCase().includes(query) ||
-                                     profile.company.about.toLowerCase().includes(query) ||
-                                     profile.company.industry.toLowerCase().includes(query) ||
-                                     profile.company.tags.some(tag => tag.toLowerCase().includes(query));
-                
-                return individualMatch || companyMatch;
+            const filteredData = basePeopleData.filter(person => {
+                const companyNames = (person.companies || []).map(c => c.name).join(' ');
+                const newsText = (person.news || []).join(' ');
+                const searchData = `${person.name} ${person.position} ${person.country} ${newsText} ${companyNames}`.toLowerCase();
+                return searchData.includes(term);
             });
-            renderProfiles(filtered);
+
+            // Sort search results by wealth by default (since popular cards section is hidden)
+            filteredData.sort((a, b) => (b.sortWealth || 0) - (a.sortWealth || 0));
+
+            const cardsHtml = filteredData.map(createPersonCard).join('');
+            searchResultsContainer.innerHTML = cardsHtml || '<p class="text-slate-400 text-lg py-8 col-span-4 italic">No SPORAX records found matching your query.</p>';
+
+            popularCardsSection.classList.add('hidden');
+            searchResultsSection.classList.remove('hidden');
+
+            if (filteredData.length > 0) {
+                 applyFadeIn('search-results-container');
+            }
         }
 
-        function updateTimeIndicator() {
-            const minutes = Math.floor(Math.random() * 7) + 5; // Random number between 5-11
-            document.getElementById('update-indicator').textContent = `Updated ${minutes} minutes ago`;
+        function openModal(personJson) {
+            const person = JSON.parse(personJson);
+            const modal = document.getElementById('card-modal');
+            const modalContent = document.getElementById('modal-content');
+            const formattedValue = formatValue(person.sortWealth); // Use new formatter
+
+            const sourceDetailsHtml = Object.values(SOURCES).map(source => {
+                const isUsed = person.sources && person.sources.some(s => s.id === source.id);
+                return `
+                    <div class="flex items-center space-x-3 text-lg">
+                        <div class="w-3 h-3 ${isUsed ? source.color : 'bg-slate-700'} rounded-full"></div>
+                        <span class="${isUsed ? 'text-slate-50 font-semibold' : 'text-slate-400'}">${source.name} (${source.id})</span>
+                    </div>
+                `;
+            }).join('');
+
+            const companyDetailsHtml = (person.companies || []).map(company => `
+                <div class="flex items-center space-x-4 p-4 card-bg rounded-xl border border-slate-700">
+                    <img src="${company.logo}" alt="${company.name} logo" class="w-10 h-10 rounded-full object-cover">
+                    <div>
+                        <p class="text-xl font-bold text-amber-300">${company.name}</p>
+                        <p class="text-base text-slate-400">Est. Value: <span class="text-slate-200">${company.value}</span></p>
+                    </div>
+                </div>
+            `).join('');
+
+            const newsHtml = (person.news && person.news.length > 0) ? person.news.map(n => `<p class="text-base italic text-slate-300">• ${n}</p>`).join('') : '<p class="text-slate-500 italic">none available</p>';
+
+            const notesHtml = person.notes ? `<p class="text-xs text-slate-400 mt-2">Note: ${person.notes}</p>` : '';
+
+            const flagHtml = person.flag ? `<span style="font-size:26px;margin-right:8px">${person.flag}</span>` : '';
+
+            // Simplified age logic
+            const ageDisplay = person.age ? ` • Age ${person.age}` : '';
+
+            // News summary logic for modal (only show AI tag if there's actual news)
+            let hasActualNews = person.news && person.news.filter(n => n.toLowerCase().trim() !== 'none available').length > 0;
+            const aiSummaryModalHtml = hasActualNews ? '<p class="text-xs text-slate-500 mt-2">Summarized by ✨ AI</p>' : '';
+
+
+            const modalHtml = `
+                <div class="flex justify-between items-start mb-6 border-b border-slate-700 pb-4">
+                    <div class="flex items-center space-x-6">
+                        <img src="${person.image}" alt="${person.name}" class="w-20 h-20 rounded-full object-cover border-4 border-amber-400">
+                        <div>
+                            <h2 class="text-4xl font-black text-slate-50">${flagHtml}${person.name}</h2>
+                            <p class="text-xl font-medium text-amber-400 mt-1">${person.position}</p>
+                            <p class="text-sm text-slate-400 mt-1">${person.country}${ageDisplay}</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-white transition duration-200 p-2 rounded-full hover:bg-slate-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="lg:col-span-2">
+                        <p class="text-lg uppercase tracking-wider text-slate-400 mb-2">Current Estimated Net Worth</p>
+                        <p class="text-5xl font-extrabold text-amber-500">${formattedValue}</p>
+                        <p class="text-sm text-slate-500 mt-1">Accuracy: varies by source | Last Updated: Today</p>
+                        ${notesHtml}
+                    </div>
+                    <div class="bg-slate-700 p-4 rounded-xl">
+                        <p class="text-sm uppercase tracking-wider text-slate-400 mb-2">Sources Used</p>
+                        <div class="space-y-2">
+                            ${sourceDetailsHtml}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-slate-100 mb-3 border-b border-slate-800 pb-2">Associated Companies & Assets</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${companyDetailsHtml || '<p class="text-slate-500 italic">No major corporate holdings currently itemized.</p>'}
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-100 mb-3 border-b border-slate-800 pb-2">Recent Reliable News (RNS)</h3>
+                    <div class="p-4 bg-slate-700/50 rounded-xl">
+                        ${newsHtml}
+                        ${aiSummaryModalHtml}
+                    </div>
+                </div>
+            `;
+
+            modalContent.innerHTML = modalHtml;
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
         }
 
-        // Initial render on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProfiles(profilesData);
-            updateTimeIndicator();
-            
-            // Update the time indicator every minute
-            setInterval(updateTimeIndicator, 60000);
-        });
+        function closeModal() {
+            document.getElementById('card-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Initialize the app
+        window.onload = function() {
+            // Set default sort to Net Worth (High to Low) and render
+            document.getElementById('sort-select').value = 'wealth_desc';
+            sortAndRenderCards();
+        };
     </script>
 </body>
 </html>
