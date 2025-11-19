@@ -598,25 +598,6 @@
             document.getElementById('mobile-logout-btn').classList.remove('hidden');
         }
         
-        function showWealthDatabase() {
-            homePage.classList.add('hidden');
-            bankingDashboard.classList.add('hidden');
-            wealthDatabase.classList.remove('hidden');
-            
-            // Update navigation buttons based on login status
-            if (isLoggedIn) {
-                document.getElementById('login-btn').classList.add('hidden');
-                document.getElementById('logout-btn').classList.remove('hidden');
-                document.getElementById('mobile-login-btn').classList.add('hidden');
-                document.getElementById('mobile-logout-btn').classList.remove('hidden');
-            } else {
-                document.getElementById('login-btn').classList.remove('hidden');
-                document.getElementById('logout-btn').classList.add('hidden');
-                document.getElementById('mobile-login-btn').classList.remove('hidden');
-                document.getElementById('mobile-logout-btn').classList.add('hidden');
-            }
-        }
-        
         // Auth Modal Functions
         function showAuthModal() {
             authModal.classList.remove('hidden');
