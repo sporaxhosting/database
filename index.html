@@ -12,8 +12,15 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#223030">
     
+    <!-- App Icons -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
     <link rel="apple-touch-icon" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    
+    <!-- Splash Screen Images -->
+    <link rel="apple-touch-startup-image" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIGZpbGw9IiMyMjMwMzAiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI0MDAiIHI9IjEwMCIgZmlsbD0iI0JCQTU4RiIvPjx0ZXh0IHg9IjUxMiIgeT0iNjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IiNFREQ5Q0QiPkRhdGFiYXNlPC90ZXh0Pjwvc3ZnPg==">
     
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -43,11 +50,19 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            overflow: auto; /* FIXED: Enable scrolling */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
         }
         
-        /* Prevent zoom on double-tap */
-        button, a {
+        /* Prevent zoom on double-tap but allow scrolling */
+        button, a, input {
             touch-action: manipulation;
+        }
+        
+        /* Allow scrolling on main content */
+        .scrollable {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .header-gradient {
@@ -120,10 +135,83 @@
                 padding-top: env(safe-area-inset-top);
             }
         }
+        
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-green), var(--brown));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .splash-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--tan), var(--cream));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .splash-subtitle {
+            color: var(--sage);
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+        
+        .splash-loading {
+            margin-top: 2rem;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--sage);
+            border-top: 3px solid var(--tan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Hide splash screen when app loads */
+        .splash-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="min-h-screen min-h-screen-ios ios-safe-area">
-    <!-- Rest of your HTML remains exactly the same -->
+<body class="min-h-screen min-h-screen-ios ios-safe-area scrollable">
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="splash-logo">
+        <div class="splash-text">SPORAX</div>
+        <div class="splash-subtitle">Wealth Database</div>
+        <div class="splash-loading"></div>
+    </div>
+
     <!-- Mobile Menu Button -->
     <div class="lg:hidden fixed top-4 right-4 z-50" style="top: calc(env(safe-area-inset-top) + 1rem);">
         <button id="mobile-menu-button" class="p-2 rounded-lg bg-[#523D35] text-[#E8D9CD]">
@@ -163,7 +251,6 @@
 
     <!-- Home Page -->
     <div id="home-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Your existing home page content -->
         <div class="text-center mb-12">
             <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-16 h-16 sm:w-20 sm:h-20">
@@ -285,7 +372,7 @@
             <!-- Account Balance Card -->
             <div class="banking-card p-6 rounded-2xl lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,</span></p>
+                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,000</span></p>
                 <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">Today, 14:30</span></p>
             </div>
             
@@ -512,6 +599,23 @@
     </footer>
 
     <script>
+        // Fix scrolling issue
+        document.body.style.overflow = 'auto';
+        document.body.style.webkitOverflowScrolling = 'touch';
+
+        // Handle splash screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const splashScreen = document.getElementById('splash-screen');
+                splashScreen.classList.add('splash-hidden');
+                
+                // Remove splash screen from DOM after fade out
+                setTimeout(function() {
+                    splashScreen.remove();
+                }, 500);
+            }, 2000); // Show splash screen for 2 seconds
+        });
+
         // PWA Installation
         let deferredPrompt;
         const installPrompt = document.getElementById('install-prompt');
@@ -561,11 +665,6 @@
         if (isRunningStandalone()) {
             installPrompt.classList.add('hidden');
         }
-
-        // Prevent bounce effect on iOS
-        document.body.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
 
         // Your existing JavaScript code continues here...
         // Application State
@@ -827,7 +926,7 @@
         
         // Initialize the application
         function initApp() {
-            showHomePage();
+            // Don't show home page immediately - let splash screen handle it
             initializeTransactions();
             
             // Check if user is already logged in (for demo purposes)
@@ -836,11 +935,19 @@
             if (loggedInUser) {
                 currentUser = JSON.parse(loggedInUser);
                 isLoggedIn = true;
-                showBankingDashboard();
+                // Wait for splash screen to finish before showing dashboard
+                setTimeout(() => {
+                    showBankingDashboard();
+                }, 2000);
+            } else {
+                // Wait for splash screen to finish before showing home page
+                setTimeout(() => {
+                    showHomePage();
+                }, 2000);
             }
         }
         
-        // Start the application
+        // Start the application after splash screen
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
