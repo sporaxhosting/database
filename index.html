@@ -86,17 +86,65 @@
         .border-accent {
             border-color: var(--tan);
         }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .text-responsive {
+                font-size: clamp(1.5rem, 5vw, 2.5rem);
+            }
+            
+            .balance-text {
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
+            }
+            
+            .table-responsive {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
+    <!-- Mobile Menu Button -->
+    <div class="lg:hidden fixed top-4 right-4 z-50">
+        <button id="mobile-menu-button" class="p-2 rounded-lg bg-[#523D35] text-[#E8D9CD]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-[#223030] z-40 lg:hidden">
+        <div class="p-6 pt-20">
+            <div class="flex flex-col space-y-6">
+                <button id="mobile-home-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg bg-[#523D35] text-[#E8D9CD]">Home</button>
+                <button id="mobile-database-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg bg-[#523D35] text-[#E8D9CD]">Wealth Database</button>
+                <button id="mobile-login-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg btn-primary">Login</button>
+                <button id="mobile-logout-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg btn-secondary hidden">Logout</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="bg-[#223030] border-b border-[#523D35] py-4">
+    <nav class="bg-[#223030] border-b border-[#523D35] py-4 sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-10 h-10">
-                <span class="text-2xl font-bold" style="color: #E8D9CD;">SPORAX</span>
+                <span class="text-2xl font-bold hidden sm:block" style="color: #E8D9CD;">SPORAX</span>
             </div>
-            <div class="flex space-x-4">
+            <div class="hidden lg:flex space-x-4">
                 <button id="home-btn" class="px-4 py-2 rounded-lg btn-primary font-medium">Home</button>
                 <button id="database-btn" class="px-4 py-2 rounded-lg btn-secondary font-medium">Wealth Database</button>
                 <button id="login-btn" class="px-4 py-2 rounded-lg btn-primary font-medium">Login</button>
@@ -106,26 +154,26 @@
     </nav>
 
     <!-- Home Page (Visible to all) -->
-    <div id="home-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center mb-16">
-            <div class="flex items-center justify-center space-x-4 mb-8">
-                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-20 h-20">
-                <h1 class="header-gradient text-6xl sm:text-8xl font-black tracking-tighter">SPORAX</h1>
+    <div id="home-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="text-center mb-12">
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-16 h-16 sm:w-20 sm:h-20">
+                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-responsive">SPORAX</h1>
             </div>
-            <p class="text-xl mb-12 max-w-2xl mx-auto" style="color: #E8D9CD;">
+            <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto px-4" style="color: #E8D9CD;">
                 Your gateway to global wealth intelligence and premium banking services
             </p>
             
-            <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
-                <button id="home-login-btn" class="px-8 py-4 text-lg rounded-xl btn-primary font-bold">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12 px-4">
+                <button id="home-login-btn" class="px-6 py-4 sm:px-8 sm:py-4 text-lg rounded-xl btn-primary font-bold w-full sm:w-auto">
                     Login to Banking Portal
                 </button>
-                <button id="home-database-btn" class="px-8 py-4 text-lg rounded-xl btn-secondary font-bold">
+                <button id="home-database-btn" class="px-6 py-4 sm:px-8 sm:py-4 text-lg rounded-xl btn-secondary font-bold w-full sm:w-auto">
                     Explore Wealth Database
                 </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto px-4">
                 <div class="p-6 rounded-xl banking-card">
                     <h3 class="text-xl font-bold mb-3" style="color: #E8D9CD;">Wealth Database</h3>
                     <p class="text-sm" style="color: #BBA58F;">
@@ -150,7 +198,7 @@
 
     <!-- Login/Signup Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-        <div class="card-bg rounded-2xl p-8 max-w-md w-full">
+        <div class="card-bg rounded-2xl p-6 sm:p-8 max-w-md w-full mx-2">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold" style="color: #E8D9CD;">SPORAX Banking</h2>
                 <button id="close-auth-modal" class="text-slate-400 hover:text-white">
@@ -199,17 +247,17 @@
     </div>
 
     <!-- Banking Dashboard (Visible only when logged in) -->
-    <div id="banking-dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold mb-2" style="color: #E8D9CD;">Banking Dashboard</h1>
+    <div id="banking-dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 hidden">
+        <div class="mb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-2" style="color: #E8D9CD;">Banking Dashboard</h1>
             <p class="text-[#BBA58F]">Welcome back, <span id="user-name">User</span></p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Account Balance Card -->
             <div class="banking-card p-6 rounded-2xl lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-4xl font-bold mb-2" style="color: #E8D9CD;">$<span id="account-balance">24,587,360</span></p>
+                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">24,587,360</span></p>
                 <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">Today, 14:30</span></p>
             </div>
             
@@ -225,14 +273,14 @@
         </div>
         
         <!-- Investments Section -->
-        <div class="mb-12">
-            <div class="flex justify-between items-center mb-6">
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                 <h2 class="text-2xl font-bold" style="color: #E8D9CD;">Your Investments</h2>
-                <button class="px-4 py-2 rounded-lg btn-primary text-sm font-medium">Explore Opportunities</button>
+                <button class="px-4 py-2 rounded-lg btn-primary text-sm font-medium w-full sm:w-auto">Explore Opportunities</button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="investment-card p-6 rounded-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h3 class="font-bold text-lg" style="color: #E8D9CD;">Tesla Inc</h3>
@@ -240,11 +288,11 @@
                         </div>
                         <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+2.4%</span>
                     </div>
-                    <p class="text-2xl font-bold mb-2" style="color: #E8D9CD;">$720.54B</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$720.54B</p>
                     <p class="text-sm" style="color: #959D90;">Market Cap</p>
                 </div>
                 
-                <div class="investment-card p-6 rounded-xl">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h3 class="font-bold text-lg" style="color: #E8D9CD;">Amazon.com</h3>
@@ -252,11 +300,11 @@
                         </div>
                         <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+1.2%</span>
                     </div>
-                    <p class="text-2xl font-bold mb-2" style="color: #E8D9CD;">$1.80T</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$1.80T</p>
                     <p class="text-sm" style="color: #959D90;">Market Cap</p>
                 </div>
                 
-                <div class="investment-card p-6 rounded-xl">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h3 class="font-bold text-lg" style="color: #E8D9CD;">Nordic SafeBank</h3>
@@ -264,42 +312,44 @@
                         </div>
                         <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+0.8%</span>
                     </div>
-                    <p class="text-2xl font-bold mb-2" style="color: #E8D9CD;">$1.10B</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$1.10B</p>
                     <p class="text-sm" style="color: #959D90;">Market Cap</p>
                 </div>
             </div>
         </div>
         
         <!-- Transaction History -->
-        <div class="mb-12">
+        <div class="mb-8">
             <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Recent Transactions</h2>
             
             <div class="banking-card rounded-xl overflow-hidden">
-                <table class="w-full">
-                    <thead>
-                        <tr class="border-b border-[#523D35]">
-                            <th class="text-left py-4 px-6 font-medium" style="color: #BBA58F;">Date</th>
-                            <th class="text-left py-4 px-6 font-medium" style="color: #BBA58F;">Description</th>
-                            <th class="text-left py-4 px-6 font-medium" style="color: #BBA58F;">Amount</th>
-                            <th class="text-left py-4 px-6 font-medium" style="color: #BBA58F;">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="transaction-list">
-                        <!-- Transactions will be populated by JavaScript -->
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="w-full min-w-full">
+                        <thead>
+                            <tr class="border-b border-[#523D35]">
+                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Date</th>
+                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Description</th>
+                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Amount</th>
+                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-list">
+                            <!-- Transactions will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         
         <!-- Companies Section -->
-        <div class="mb-12">
+        <div class="mb-8">
             <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Featured Companies</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="investment-card p-6 rounded-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-[#223030] flex items-center justify-center mr-4">
-                            <span class="font-bold" style="color: #BBA58F;">TS</span>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
+                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">TS</span>
                         </div>
                         <div>
                             <h3 class="font-bold" style="color: #E8D9CD;">Tesla Inc</h3>
@@ -322,10 +372,10 @@
                     </div>
                 </div>
                 
-                <div class="investment-card p-6 rounded-xl">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-[#223030] flex items-center justify-center mr-4">
-                            <span class="font-bold" style="color: #BBA58F;">AM</span>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
+                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">AM</span>
                         </div>
                         <div>
                             <h3 class="font-bold" style="color: #E8D9CD;">Amazon.com</h3>
@@ -348,10 +398,10 @@
                     </div>
                 </div>
                 
-                <div class="investment-card p-6 rounded-xl">
+                <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-[#223030] flex items-center justify-center mr-4">
-                            <span class="font-bold" style="color: #BBA58F;">NS</span>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
+                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">NS</span>
                         </div>
                         <div>
                             <h3 class="font-bold" style="color: #E8D9CD;">Nordic SafeBank</h3>
@@ -378,35 +428,34 @@
     </div>
 
     <!-- Wealth Database (Visible to all) -->
-    <div id="wealth-database" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 hidden">
-        <!-- Your existing wealth database code would go here -->
-        <div class="text-center mb-16 pt-8">
-            <div class="flex items-center justify-center space-x-4">
+    <div id="wealth-database" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 hidden">
+        <div class="text-center mb-12 pt-4">
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-12 h-12 sm:w-16 sm:h-16">
-                <h1 class="header-gradient text-6xl sm:text-8xl font-black tracking-tighter">SPORAX</h1>
+                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-responsive">SPORAX</h1>
             </div>
-            <p class="text-sm tracking-widest uppercase mt-2" style="letter-spacing: 0.4em; color: #959D90;">
+            <p class="text-sm tracking-widest uppercase mt-2 px-4" style="letter-spacing: 0.4em; color: #959D90;">
                 Reliable Wealth Analysis since 2003
             </p>
-            <div class="mt-10 w-full max-w-2xl mx-auto">
+            <div class="mt-8 w-full max-w-2xl mx-auto px-4">
                 <div class="flex items-center bg-[#523D35] rounded-xl p-3 border border-[#523D35] hover:border-[#BBA58F] transition-all duration-300 shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" style="color: #959D90;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <input type="text" id="search-input" placeholder="Search individuals, companies, or assets..." class="w-full bg-transparent text-lg focus:outline-none" style="color: #E8D9CD;" placeholder-style="color: #959D90;" />
+                    <input type="text" id="search-input" placeholder="Search individuals, companies, or assets..." class="w-full bg-transparent text-base sm:text-lg focus:outline-none" style="color: #E8D9CD;" placeholder-style="color: #959D90;" />
                 </div>
             </div>
         </div>
 
-        <section class="mb-20 p-8 card-bg rounded-xl shadow-lg border border-[#523D35] text-center">
-            <div class="flex items-center justify-center space-x-3 mb-4">
+        <section class="mb-12 p-6 sm:p-8 card-bg rounded-xl shadow-lg border border-[#523D35] text-center mx-4 sm:mx-0">
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-3 mb-4">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-8 h-8">
-                <h2 class="text-3xl font-bold" style="color: #BBA58F;">What is SPORAX?</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold" style="color: #BBA58F;">What is SPORAX?</h2>
             </div>
-            <p class="leading-relaxed max-w-4xl mx-auto" style="color: #E8D9CD;">
+            <p class="leading-relaxed max-w-4xl mx-auto text-sm sm:text-base px-2" style="color: #E8D9CD;">
                 SPORAX is a leading public wealth and asset database, dedicated to providing timely and highly accurate net worth estimations for notable individuals and valuable businesses globally.
             </p>
-            <div class="flex flex-wrap gap-4 mt-6 text-sm justify-center">
+            <div class="flex flex-wrap gap-3 mt-6 text-xs sm:text-sm justify-center">
                 <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">RRPT - Public Transactions</span>
                 <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">IAR - Institutional Records</span>
                 <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">RNS - News Sources</span>
@@ -414,18 +463,18 @@
         </section>
 
         <!-- Database content would continue here -->
-        <div class="text-center py-12">
-            <p style="color: #BBA58F;">Wealth database functionality would be implemented here</p>
-            <button id="back-to-home-from-db" class="mt-6 px-6 py-3 rounded-lg btn-primary font-medium">Back to Home</button>
+        <div class="text-center py-8 px-4">
+            <p class="text-sm sm:text-base" style="color: #BBA58F;">Wealth database functionality would be implemented here</p>
+            <button id="back-to-home-from-db" class="mt-6 px-6 py-3 rounded-lg btn-primary font-medium w-full sm:w-auto">Back to Home</button>
         </div>
     </div>
 
-    <footer class="bg-[#223030] border-t border-[#523D35] mt-16 py-8 text-center">
+    <footer class="bg-[#223030] border-t border-[#523D35] mt-12 py-8 text-center">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-sm mb-4" style="color: #959D90;">
                 © 2026 SPORAX Wealth & Asset Databases. All Rights Reserved.
             </p>
-            <div class="flex justify-center space-x-6 text-sm">
+            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
                 <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Privacy Policy</a>
                 <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Terms of Use</a>
                 <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Methodology</a>
@@ -438,6 +487,7 @@
         // Application State
         let currentUser = null;
         let isLoggedIn = false;
+        let mobileMenuOpen = false;
         
         // Sample data - in a real app, this would come from a server
         const sampleTransactions = [
@@ -456,15 +506,26 @@
         const loginForm = document.getElementById('login-form');
         const signupForm = document.getElementById('signup-form');
         const transactionList = document.getElementById('transaction-list');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
         
         // Navigation Buttons
-        document.getElementById('home-btn').addEventListener('click', showHomePage);
-        document.getElementById('database-btn').addEventListener('click', showWealthDatabase);
-        document.getElementById('login-btn').addEventListener('click', showAuthModal);
-        document.getElementById('logout-btn').addEventListener('click', logout);
+        document.getElementById('home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
+        document.getElementById('database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
+        document.getElementById('login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
+        document.getElementById('logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
         document.getElementById('home-login-btn').addEventListener('click', showAuthModal);
         document.getElementById('home-database-btn').addEventListener('click', showWealthDatabase);
         document.getElementById('back-to-home-from-db').addEventListener('click', showHomePage);
+        
+        // Mobile Navigation Buttons
+        document.getElementById('mobile-home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
+        document.getElementById('mobile-database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
+        document.getElementById('mobile-login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
+        document.getElementById('mobile-logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
+        
+        // Mobile Menu Toggle
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
         
         // Auth Modal Elements
         document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
@@ -480,6 +541,23 @@
             }
         });
         
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            mobileMenuOpen = !mobileMenuOpen;
+            if (mobileMenuOpen) {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            } else {
+                closeMobileMenu();
+            }
+        }
+        
+        function closeMobileMenu() {
+            mobileMenuOpen = false;
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+        
         // Page Navigation Functions
         function showHomePage() {
             homePage.classList.remove('hidden');
@@ -490,9 +568,13 @@
             if (isLoggedIn) {
                 document.getElementById('login-btn').classList.add('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
+                document.getElementById('mobile-login-btn').classList.add('hidden');
+                document.getElementById('mobile-logout-btn').classList.remove('hidden');
             } else {
                 document.getElementById('login-btn').classList.remove('hidden');
                 document.getElementById('logout-btn').classList.add('hidden');
+                document.getElementById('mobile-login-btn').classList.remove('hidden');
+                document.getElementById('mobile-logout-btn').classList.add('hidden');
             }
         }
         
@@ -512,6 +594,8 @@
             // Update navigation buttons
             document.getElementById('login-btn').classList.add('hidden');
             document.getElementById('logout-btn').classList.remove('hidden');
+            document.getElementById('mobile-login-btn').classList.add('hidden');
+            document.getElementById('mobile-logout-btn').classList.remove('hidden');
         }
         
         function showWealthDatabase() {
@@ -523,9 +607,13 @@
             if (isLoggedIn) {
                 document.getElementById('login-btn').classList.add('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
+                document.getElementById('mobile-login-btn').classList.add('hidden');
+                document.getElementById('mobile-logout-btn').classList.remove('hidden');
             } else {
                 document.getElementById('login-btn').classList.remove('hidden');
                 document.getElementById('logout-btn').classList.add('hidden');
+                document.getElementById('mobile-login-btn').classList.remove('hidden');
+                document.getElementById('mobile-logout-btn').classList.add('hidden');
             }
         }
         
@@ -573,6 +661,7 @@
                     username: username
                 };
                 isLoggedIn = true;
+                localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
                 closeAuthModal();
                 showBankingDashboard();
             } else {
@@ -584,6 +673,7 @@
                         username: username
                     };
                     isLoggedIn = true;
+                    localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
                     closeAuthModal();
                     showBankingDashboard();
                 } else {
@@ -626,6 +716,7 @@
         function logout() {
             currentUser = null;
             isLoggedIn = false;
+            localStorage.removeItem('sporaxCurrentUser');
             showHomePage();
         }
         
@@ -638,10 +729,10 @@
                 row.className = 'border-b border-[#523D35] hover:bg-[#523D35] transition-colors';
                 
                 row.innerHTML = `
-                    <td class="py-4 px-6" style="color: #E8D9CD;">${transaction.date}</td>
-                    <td class="py-4 px-6" style="color: #E8D9CD;">${transaction.description}</td>
-                    <td class="py-4 px-6 font-medium" style="color: ${transaction.amount.startsWith('+') ? '#BBA58F' : '#E8D9CD'}">${transaction.amount}</td>
-                    <td class="py-4 px-6">
+                    <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.date}</td>
+                    <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.description}</td>
+                    <td class="py-3 px-4 sm:px-6 text-sm font-medium" style="color: ${transaction.amount.startsWith('+') ? '#BBA58F' : '#E8D9CD'}">${transaction.amount}</td>
+                    <td class="py-3 px-4 sm:px-6 text-sm">
                         <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">${transaction.status}</span>
                     </td>
                 `;
