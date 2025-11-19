@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORAX | Wealth Database & Banking</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SPORAX">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#223030">
+    
     <link rel="icon" type="image/png" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SPORAX">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --dark-green: #223030;
@@ -21,6 +37,17 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-green);
             color: var(--off-white);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Prevent zoom on double-tap */
+        button, a {
+            touch-action: manipulation;
         }
         
         .header-gradient {
@@ -31,24 +58,6 @@
         
         .card-bg {
             background-color: var(--brown);
-        }
-        
-        .person-card {
-            transition: opacity 0.4s ease-in;
-            opacity: 1;
-        }
-        
-        .fade-in-initial {
-            opacity: 0;
-        }
-        
-        .fade-in-initial.ready {
-            opacity: 1;
-        }
-        
-        .flag {
-            font-size: 20px;
-            margin-right: 6px;
         }
         
         .banking-card {
@@ -79,14 +88,6 @@
             background-color: var(--cream);
         }
         
-        .text-accent {
-            color: var(--tan);
-        }
-        
-        .border-accent {
-            border-color: var(--tan);
-        }
-        
         /* Mobile menu styles */
         .mobile-menu {
             transform: translateX(-100%);
@@ -97,27 +98,34 @@
             transform: translateX(0);
         }
         
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-            .text-responsive {
-                font-size: clamp(1.5rem, 5vw, 2.5rem);
+        /* iOS-specific styles */
+        @supports (-webkit-touch-callout: none) {
+            .ios-safe-area {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
             }
             
-            .balance-text {
-                font-size: clamp(1.75rem, 6vw, 2.5rem);
+            .min-h-screen-ios {
+                min-height: -webkit-fill-available;
+            }
+        }
+        
+        /* Hide browser UI when in standalone mode */
+        @media all and (display-mode: standalone) {
+            body {
+                padding-top: env(safe-area-inset-top);
             }
             
-            .table-responsive {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
+            nav {
+                padding-top: env(safe-area-inset-top);
             }
         }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen min-h-screen-ios ios-safe-area">
+    <!-- Rest of your HTML remains exactly the same -->
     <!-- Mobile Menu Button -->
-    <div class="lg:hidden fixed top-4 right-4 z-50">
+    <div class="lg:hidden fixed top-4 right-4 z-50" style="top: calc(env(safe-area-inset-top) + 1rem);">
         <button id="mobile-menu-button" class="p-2 rounded-lg bg-[#523D35] text-[#E8D9CD]">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -126,7 +134,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-[#223030] z-40 lg:hidden">
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-[#223030] z-40 lg:hidden ios-safe-area">
         <div class="p-6 pt-20">
             <div class="flex flex-col space-y-6">
                 <button id="mobile-home-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg bg-[#523D35] text-[#E8D9CD]">Home</button>
@@ -138,7 +146,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="bg-[#223030] border-b border-[#523D35] py-4 sticky top-0 z-30">
+    <nav class="bg-[#223030] border-b border-[#523D35] py-4 sticky top-0 z-30 ios-safe-area">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-10 h-10">
@@ -153,12 +161,13 @@
         </div>
     </nav>
 
-    <!-- Home Page (Visible to all) -->
+    <!-- Home Page -->
     <div id="home-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Your existing home page content -->
         <div class="text-center mb-12">
             <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
                 <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-16 h-16 sm:w-20 sm:h-20">
-                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-responsive">SPORAX</h1>
+                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">SPORAX</h1>
             </div>
             <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto px-4" style="color: #E8D9CD;">
                 Your gateway to global wealth intelligence and premium banking services
@@ -171,6 +180,25 @@
                 <button id="home-database-btn" class="px-6 py-4 sm:px-8 sm:py-4 text-lg rounded-xl btn-secondary font-bold w-full sm:w-auto">
                     Explore Wealth Database
                 </button>
+            </div>
+            
+            <!-- Install App Prompt -->
+            <div id="install-prompt" class="bg-[#523D35] border border-[#BBA58F] rounded-xl p-6 max-w-md mx-auto mb-8 hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold" style="color: #E8D9CD;">Install SPORAX App</h3>
+                    <button id="close-install-prompt" class="text-[#959D90] hover:text-[#E8D9CD]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-sm mb-4" style="color: #BBA58F;">
+                    Install SPORAX on your home screen for a native app experience
+                </p>
+                <div class="flex space-x-3">
+                    <button id="install-btn" class="flex-1 py-2 rounded-lg btn-primary text-sm font-medium">Install</button>
+                    <button class="flex-1 py-2 rounded-lg bg-[#223030] text-[#E8D9CD] text-sm font-medium border border-[#523D35]">Later</button>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto px-4">
@@ -257,7 +285,7 @@
             <!-- Account Balance Card -->
             <div class="banking-card p-6 rounded-2xl lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">24,587,360</span></p>
+                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,</span></p>
                 <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">Today, 14:30</span></p>
             </div>
             
@@ -484,6 +512,62 @@
     </footer>
 
     <script>
+        // PWA Installation
+        let deferredPrompt;
+        const installPrompt = document.getElementById('install-prompt');
+        const installBtn = document.getElementById('install-btn');
+        const closeInstallPrompt = document.getElementById('close-install-prompt');
+
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install prompt
+            setTimeout(() => {
+                installPrompt.classList.remove('hidden');
+            }, 3000);
+        });
+
+        // Install button handler
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installPrompt.classList.add('hidden');
+                }
+                // Clear the saved prompt since it can't be used again
+                deferredPrompt = null;
+            }
+        });
+
+        // Close install prompt
+        closeInstallPrompt.addEventListener('click', () => {
+            installPrompt.classList.add('hidden');
+        });
+
+        // Detect if app is running in standalone mode
+        function isRunningStandalone() {
+            return (window.matchMedia('(display-mode: standalone)').matches) || 
+                   (window.navigator.standalone) || 
+                   (document.referrer.includes('android-app://'));
+        }
+
+        // Hide install prompt if already installed
+        if (isRunningStandalone()) {
+            installPrompt.classList.add('hidden');
+        }
+
+        // Prevent bounce effect on iOS
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Your existing JavaScript code continues here...
         // Application State
         let currentUser = null;
         let isLoggedIn = false;
@@ -596,6 +680,25 @@
             document.getElementById('logout-btn').classList.remove('hidden');
             document.getElementById('mobile-login-btn').classList.add('hidden');
             document.getElementById('mobile-logout-btn').classList.remove('hidden');
+        }
+        
+        function showWealthDatabase() {
+            homePage.classList.add('hidden');
+            bankingDashboard.classList.add('hidden');
+            wealthDatabase.classList.remove('hidden');
+            
+            // Update navigation buttons based on login status
+            if (isLoggedIn) {
+                document.getElementById('login-btn').classList.add('hidden');
+                document.getElementById('logout-btn').classList.remove('hidden');
+                document.getElementById('mobile-login-btn').classList.add('hidden');
+                document.getElementById('mobile-logout-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('login-btn').classList.remove('hidden');
+                document.getElementById('logout-btn').classList.add('hidden');
+                document.getElementById('mobile-login-btn').classList.remove('hidden');
+                document.getElementById('mobile-logout-btn').classList.add('hidden');
+            }
         }
         
         // Auth Modal Functions
@@ -721,149 +824,6 @@
                 transactionList.appendChild(row);
             });
         }
-
-        /* ============================
-   SPORAX WEALTH DATABASE DATA
-   ============================ */
-
-const wealthData = [
-    {
-        name: "Elon Musk",
-        country: "USA",
-        flag: "🇺🇸",
-        position: "CEO, Tesla & SpaceX",
-        netWorth: 210000000000,
-        companies: ["Tesla", "SpaceX"]
-    },
-    {
-        name: "Jeff Bezos",
-        country: "USA",
-        flag: "🇺🇸",
-        position: "Executive Chairman, Amazon",
-        netWorth: 165000000000,
-        companies: ["Amazon", "Blue Origin"]
-    },
-    {
-        name: "Lars Bergström",
-        country: "Sweden",
-        flag: "🇸🇪",
-        position: "CEO, Nordic SafeBank",
-        netWorth: 420000000,
-        companies: ["Nordic SafeBank"]
-    },
-    {
-        name: "Owen Clarke",
-        country: "United Kingdom",
-        flag: "🇬🇧",
-        position: "CEO, Riverbridge Capital",
-        netWorth: 210800000,
-        companies: ["Riverbridge Capital"]
-    },
-    {
-        name: "Sophie Dubois",
-        country: "France",
-        flag: "🇫🇷",
-        position: "VC Partner, Orsay Capital",
-        netWorth: 120500000,
-        companies: ["Orsay Capital"]
-    }
-];
-
-/* ============================
-   FORMATTERS
-   ============================ */
-
-function formatMoney(n) {
-    return "$" + (n >= 1e9
-        ? (n / 1e9).toFixed(1) + "B"
-        : (n / 1e6).toFixed(1) + "M");
-}
-
-/* ============================
-   RENDER WEALTH CARDS
-   ============================ */
-
-function renderWealthCards(list) {
-    const container = document.getElementById("wealth-results");
-    container.innerHTML = "";
-
-    list.forEach(person => {
-        const card = document.createElement("div");
-        card.className =
-            "rounded-xl p-6 border border-[#523D35] card-bg shadow-lg hover:shadow-xl transition";
-
-        card.innerHTML = `
-            <div class="flex items-center mb-4">
-                <span class="text-3xl mr-3">${person.flag}</span>
-                <div>
-                    <h3 class="text-xl font-bold text-[#E8D9CD]">${person.name}</h3>
-                    <p class="text-sm text-[#BBA58F]">${person.country}</p>
-                </div>
-            </div>
-
-            <p class="text-3xl font-bold mb-3 text-[#E8D9CD]">
-                ${formatMoney(person.netWorth)}
-            </p>
-
-            <p class="text-sm text-[#959D90] mb-4">
-                ${person.position}
-            </p>
-
-            <div class="flex flex-wrap gap-2">
-                ${person.companies
-                    .map(c => `<span class="text-xs px-2 py-1 rounded bg-[#223030] text-[#BBA58F]">${c}</span>`)
-                    .join("")}
-            </div>
-        `;
-
-        container.appendChild(card);
-    });
-}
-
-/* ============================
-   SEARCH FUNCTIONALITY
-   ============================ */
-
-const searchInput = document.getElementById("search-input");
-
-searchInput.addEventListener("input", function () {
-    const query = this.value.toLowerCase();
-
-    const filtered = wealthData.filter(person =>
-        person.name.toLowerCase().includes(query) ||
-        person.country.toLowerCase().includes(query) ||
-        person.position.toLowerCase().includes(query) ||
-        person.companies.some(c => c.toLowerCase().includes(query))
-    );
-
-    renderWealthCards(filtered);
-});
-
-/* ============================
-   LOAD CARDS ON DATABASE OPEN
-   ============================ */
-
-function showWealthDatabase() {
-    homePage.classList.add('hidden');
-    bankingDashboard.classList.add('hidden');
-    wealthDatabase.classList.remove('hidden');
-
-    // render full dataset when the page opens
-    renderWealthCards(wealthData);
-
-    // existing nav button logic...
-    if (isLoggedIn) {
-        document.getElementById('login-btn').classList.add('hidden');
-        document.getElementById('logout-btn').classList.remove('hidden');
-        document.getElementById('mobile-login-btn').classList.add('hidden');
-        document.getElementById('mobile-logout-btn').classList.remove('hidden');
-    } else {
-        document.getElementById('login-btn').classList.remove('hidden');
-        document.getElementById('logout-btn').classList.add('hidden');
-        document.getElementById('mobile-login-btn').classList.remove('hidden');
-        document.getElementById('mobile-logout-btn').classList.add('hidden');
-    }
-}
         
         // Initialize the application
         function initApp() {
