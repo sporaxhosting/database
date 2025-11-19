@@ -375,8 +375,8 @@
             <!-- Account Balance Card -->
             <div class="banking-card p-6 rounded-2xl lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,014</span></p>
-                <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">3 minutes ago</span></p>
+                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,006.93</span></p>
+                <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">1 minute ago</span></p>
             </div>
             
             <!-- Quick Actions -->
@@ -401,24 +401,24 @@
                 <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">General Electric Co</h3>
-                            <p class="text-sm" style="color: #BBA58F;">GE • Electrical</p>
+                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Republic Services Inc</h3>
+                            <p class="text-sm" style="color: #BBA58F;">RSG • Environmental</p>
                         </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">-1.37%</span>
+                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+1.53%</span>
                     </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$296.01 (143)</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$217.47 (150)</p>
                     <p class="text-sm" style="color: #959D90;">Shares</p>
                 </div>
                 
                 <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Amazon.com</h3>
-                            <p class="text-sm" style="color: #BBA58F;">AMZN • E-commerce</p>
+                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Apple Inc.</h3>
+                            <p class="text-sm" style="color: #BBA58F;">AAPL • Tech</p>
                         </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+1.2%</span>
+                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">-0.4%</span>
                     </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$225.41 (112)</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$268.56 (91)</p>
                     <p class="text-sm" style="color: #959D90;">Shares</p>
                 </div>
                 
@@ -479,11 +479,11 @@
                     <div class="space-y-2">
                         <div class="flex justify-between">
                             <span style="color: #959D90;">Revenue</span>
-                            <span style="color: #E8D9CD;">$1.12M</span>
+                            <span style="color: #E8D9CD;">BH$1.06M</span>
                         </div>
                         <div class="flex justify-between">
                             <span style="color: #959D90;">Taxes & Fees</span>
-                            <span style="color: #E8D9CD;">$4.2B</span>
+                            <span style="color: #E8D9CD;">Unknown</span>
                         </div>
                         <div class="flex justify-between">
                             <span style="color: #959D90;">Employees</span>
@@ -693,40 +693,40 @@ let mobileMenuOpen = false;
 
 // Sample data - in a real app, this would come from a server
 const sampleTransactions = [
-{ date: "2025-11-17", description: "UNITED DUBAI GOV. INT. ", amount: "-$78,000", status: "Completed" },
-{ date: "2025-11-12", description: "INVOICE  1202", amount: "+$12,132.05", status: "Completed" },
-{ date: "2025-11-11", description: "CHASE MOBILE CHECK DEPOSIT", amount: "+$9,842.00", status: "Completed" },
-{ date: "2025-11-11", description: "DUNKIN #4431", amount: "-$23.81", status: "Completed" },
-{ date: "2025-11-10", description: "WIRE - INTL CLEARING HSBC", amount: "-$42,500", status: "Completed" },
-{ date: "2025-11-10", description: "ORANGE COUNTY BAGEL", amount: "-$14.92", status: "Completed" },
-{ date: "2025-11-09", description: "APPLE CASH TRANSFER", amount: "-$250.00", status: "Completed" },
-{ date: "2025-11-09", description: "DUNKIN #2274", amount: "-$9.74", status: "Completed" },
-{ date: "2025-11-08", description: "GLOBAL TECH SOLUTIONS LLC", amount: "+$6,400.00", status: "Completed" },
-{ date: "2025-11-08", description: "MCDONALD'S 1153", amount: "-$12.59", status: "Completed" },
-{ date: "2025-11-07", description: "UNITED BANK OF EMIRATES", amount: "-$18,000", status: "Completed" },
-{ date: "2025-11-07", description: "SHOPRITE CHESTER", amount: "-$38.44", status: "Completed" },
-{ date: "2025-11-06", description: "PAYPAL *SERVICES", amount: "+$1,204.77", status: "Completed" },
-{ date: "2025-11-05", description: "AMAZON MARKETPLACE", amount: "-$31.29", status: "Completed" },
-{ date: "2025-11-05", description: "REVOLUT INTL", amount: "-$4,920.00", status: "Completed" },
-{ date: "2025-11-04", description: "CUMBERLAND FARMS", amount: "-$8.51", status: "Completed" },
-{ date: "2025-11-03", description: "STRIPE PAYOUT 8832", amount: "+$3,219.14", status: "Completed" },
-{ date: "2025-11-03", description: "DUNKIN #1981", amount: "-$6.70", status: "Completed" },
-{ date: "2025-11-02", description: "WIRE - INTL BUSINESS FEE", amount: "-$1,320.00", status: "Completed" },
-{ date: "2025-11-02", description: "ORANGE COUNTY BAGEL", amount: "-$18.25", status: "Completed" },
-{ date: "2025-11-01", description: "UNITED ARAB EMIRATES - CLEARING", amount: "+$25,000.00", status: "Completed" },
-{ date: "2025-11-01", description: "TACO BELL 3312", amount: "-$11.41", status: "Completed" },
-{ date: "2025-10-31", description: "ZELLE PAYMENT RECEIVED", amount: "+$640.00", status: "Completed" },
-{ date: "2025-10-30", description: "WALMART SUPERCENTER", amount: "-$29.88", status: "Completed" },
-{ date: "2025-10-29", description: "PAYPAL *INVOICE 4481", amount: "-$520.00", status: "Completed" },
-{ date: "2025-10-28", description: "SHELL SERVICE STATION", amount: "-$41.22", status: "Completed" },
-{ date: "2025-10-27", description: "CHASE P2P TRANSFER", amount: "+$1,100.00", status: "Completed" },
-{ date: "2025-10-26", description: "DUNKIN #0024", amount: "-$7.21", status: "Completed" },
-{ date: "2025-10-25", description: "AMAZON WEB SERVICES", amount: "-$72.16", status: "Completed" },
-{ date: "2025-10-24", description: "CVS PHARMACY 5532", amount: "-$15.89", status: "Completed" },
-{ date: "2025-10-23", description: "STRIPE PAYOUT 7781", amount: "+$2,511.90", status: "Completed" },
-{ date: "2025-10-22", description: "ORANGE COUNTY BAGEL", amount: "-$16.72", status: "Completed" },
-{ date: "2025-10-21", description: "UNITED INTL CLEARING", amount: "-$12,350.00", status: "Completed" },
-{ date: "2025-10-20", description: "DUNKIN #9153", amount: "-$9.12", status: "Completed" },
+{ date: "2025-11-17", description: "INTL WIRE UNITED DUBAI GOV. INT. REF#8842INTL", amount: "-$78,000", status: "Completed" },
+{ date: "2025-11-12", description: "INVOICE PAYMENT 1202 CLR#INV1202", amount: "+$12,132.05", status: "Completed" },
+{ date: "2025-11-11", description: "MOBILE CHECK DEPOSIT CHASE REF#MCD9842", amount: "+$9,842.00", status: "Completed" },
+{ date: "2025-11-11", description: "DEBIT CARD PURCHASE DUNKIN #4431 TERMINAL 09A", amount: "-$23.81", status: "Completed" },
+{ date: "2025-11-10", description: "INTL WIRE CLEARING HSBC REF#WIR40000INTL", amount: "-$40,000", status: "Completed" },
+{ date: "2025-11-10", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0021", amount: "-$14.92", status: "Completed" },
+{ date: "2025-11-09", description: "APPLE CASH TRANSFER DEVICE#AC250", amount: "-$250.00", status: "Completed" },
+{ date: "2025-11-09", description: "DEBIT CARD PURCHASE DUNKIN #2274 TERMINAL 44C", amount: "-$9.74", status: "Completed" },
+{ date: "2025-11-08", description: "TRANSFER MARLNAJ TECH CONV. REF#6400TRX", amount: "+$6,400.00", status: "Completed" },
+{ date: "2025-11-08", description: "POS PURCHASE MCDONALD'S 1153 TERMINAL 15B", amount: "-$12.59", status: "Completed" },
+{ date: "2025-11-07", description: "INTL WIRE UNITED BANK OF EMIRATES REF#18000INTL", amount: "-$18,000", status: "Completed" },
+{ date: "2025-11-07", description: "POS PURCHASE SHOPRITE CHESTER STORE#CH553", amount: "-$38.44", status: "Completed" },
+{ date: "2025-11-06", description: "PAYPAL *SERVICES PAYPAL REF#PP1204", amount: "+$1,204.77", status: "Completed" },
+{ date: "2025-11-05", description: "POS PURCHASE AMAZON MARKETPLACE TERM 03K", amount: "-$31.29", status: "Completed" },
+{ date: "2025-11-05", description: "INTERNATIONAL TRANSFER REVOLUT INTL REF#4920INTL", amount: "-$4,920.00", status: "Completed" },
+{ date: "2025-11-04", description: "POS PURCHASE CUMBERLAND FARMS STORE#CF201", amount: "-$8.51", status: "Completed" },
+{ date: "2025-11-03", description: "STRIPE PAYOUT 8832 CLR#STP8832", amount: "+$3,219.14", status: "Completed" },
+{ date: "2025-11-03", description: "DEBIT CARD PURCHASE DUNKIN #1981 TERMINAL 009A", amount: "-$6.70", status: "Completed" },
+{ date: "2025-11-02", description: "INTL WIRE BUSINESS FEE REF#1320INTL", amount: "-$1,320.00", status: "Completed" },
+{ date: "2025-11-02", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0024", amount: "-$18.25", status: "Completed" },
+{ date: "2025-11-01", description: "INTL CLEARING UNITED ARAB EMIRATES REF#2538191", amount: "+$25,381.91", status: "Completed" },
+{ date: "2025-11-01", description: "POS PURCHASE TACO BELL 3312 TERMINAL 3B1", amount: "-$11.41", status: "Completed" },
+{ date: "2025-10-31", description: "ZELLE PAYMENT RECEIVED ZELLE#640", amount: "+$640.00", status: "Completed" },
+{ date: "2025-10-30", description: "POS PURCHASE WALMART SUPERCENTER STORE#W292", amount: "-$29.88", status: "Completed" },
+{ date: "2025-10-29", description: "PAYPAL *INVOICE 4481 REF#PP4481", amount: "-$520.00", status: "Completed" },
+{ date: "2025-10-28", description: "POS PURCHASE SHELL SERVICE STATION TERM 77A", amount: "-$41.22", status: "Completed" },
+{ date: "2025-10-27", description: "TRANSFER CHASE P2P TRANSFER REF#P2P1100", amount: "+$1,100.00", status: "Completed" },
+{ date: "2025-10-26", description: "DEBIT CARD PURCHASE DUNKIN #0024 TERMINAL 01X", amount: "-$7.21", status: "Completed" },
+{ date: "2025-10-25", description: "POS PURCHASE AMAZON WEB SERVICES REF#AWS7216", amount: "-$72.16", status: "Completed" },
+{ date: "2025-10-24", description: "POS PURCHASE CVS PHARMACY 5532 STORE#CV5532", amount: "-$15.89", status: "Completed" },
+{ date: "2025-10-23", description: "STRIPE PAYOUT 7781 CLR#STP7781", amount: "+$2,511.90", status: "Completed" },
+{ date: "2025-10-22", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0022", amount: "-$16.72", status: "Completed" },
+{ date: "2025-10-21", description: "INTL WIRE UNITED INTL CLEARING REF#12350INTL", amount: "-$12,350.00", status: "Completed" },
+{ date: "2025-10-20", description: "DEBIT CARD PURCHASE DUNKIN #9153 TERMINAL 09B", amount: "-$9.12", status: "Completed" },
 
 ];
 
