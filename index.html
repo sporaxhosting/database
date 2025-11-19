@@ -605,365 +605,361 @@
 
     <script>
         // Fix scrolling issue
-        document.body.style.overflow = 'auto';
-        document.body.style.webkitOverflowScrolling = 'touch';
+document.body.style.overflow = 'auto';
+document.body.style.webkitOverflowScrolling = 'touch';
 
-        // Handle splash screen
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const splashScreen = document.getElementById('splash-screen');
-                splashScreen.classList.add('splash-hidden');
-                
-                // Remove splash screen from DOM after fade out
-                setTimeout(function() {
-                    splashScreen.remove();
-                }, 500);
-            }, 2000); // Show splash screen for 2 seconds
-        });
+// Handle splash screen
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const splashScreen = document.getElementById('splash-screen');
+        splashScreen.classList.add('splash-hidden');
+        
+        // Remove splash screen from DOM after fade out
+        setTimeout(function() {
+            splashScreen.remove();
+            // Initialize the app AFTER splash screen is completely removed
+            initApp();
+        }, 500);
+    }, 2000); // Show splash screen for 2 seconds
+});
 
-          // Force iOS to recognize PWA
-    if ('standalone' in navigator || window.matchMedia('(display-mode: standalone)').matches) {
-        document.documentElement.setAttribute('data-standalone', 'true');
+// Force iOS to recognize PWA
+if ('standalone' in navigator || window.matchMedia('(display-mode: standalone)').matches) {
+    document.documentElement.setAttribute('data-standalone', 'true');
+}
+
+// Add to home screen prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log('PWA installation available');
+});
+
+// PWA Installation
+const installPrompt = document.getElementById('install-prompt');
+const installBtn = document.getElementById('install-btn');
+const closeInstallPrompt = document.getElementById('close-install-prompt');
+
+// Listen for beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show the install prompt
+    setTimeout(() => {
+        installPrompt.classList.remove('hidden');
+    }, 3000);
+});
+
+// Install button handler
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            installPrompt.classList.add('hidden');
+        }
+        // Clear the saved prompt since it can't be used again
+        deferredPrompt = null;
+    }
+});
+
+// Close install prompt
+closeInstallPrompt.addEventListener('click', () => {
+    installPrompt.classList.add('hidden');
+});
+
+// Detect if app is running in standalone mode
+function isRunningStandalone() {
+    return (window.matchMedia('(display-mode: standalone)').matches) || 
+           (window.navigator.standalone) || 
+           (document.referrer.includes('android-app://'));
+}
+
+// Hide install prompt if already installed
+if (isRunningStandalone()) {
+    installPrompt.classList.add('hidden');
+}
+
+// Your existing JavaScript code continues here...
+// Application State
+let currentUser = null;
+let isLoggedIn = false;
+let mobileMenuOpen = false;
+
+// Sample data - in a real app, this would come from a server
+const sampleTransactions = [
+    { date: "2025-04-15", description: "Wire Transfer - International", amount: "-$250,000", status: "Completed" },
+    { date: "2025-04-12", description: "Dividend Payment - TSLA", amount: "+$12,450", status: "Completed" },
+    { date: "2025-04-10", description: "Stock Purchase - AMZN", amount: "-$75,000", status: "Completed" },
+    { date: "2025-04-05", description: "Monthly Service Fee", amount: "-$150", status: "Completed" },
+    { date: "2025-04-01", description: "Salary Deposit", amount: "+$45,000", status: "Completed" }
+];
+
+// DOM Elements
+const homePage = document.getElementById('home-page');
+const bankingDashboard = document.getElementById('banking-dashboard');
+const wealthDatabase = document.getElementById('wealth-database');
+const authModal = document.getElementById('auth-modal');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+const transactionList = document.getElementById('transaction-list');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+
+// Navigation Buttons
+document.getElementById('home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
+document.getElementById('database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
+document.getElementById('login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
+document.getElementById('logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
+document.getElementById('home-login-btn').addEventListener('click', showAuthModal);
+document.getElementById('home-database-btn').addEventListener('click', showWealthDatabase);
+document.getElementById('back-to-home-from-db').addEventListener('click', showHomePage);
+
+// Mobile Navigation Buttons
+document.getElementById('mobile-home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
+document.getElementById('mobile-database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
+document.getElementById('mobile-login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
+document.getElementById('mobile-logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
+
+// Mobile Menu Toggle
+mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+// Auth Modal Elements
+document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
+document.getElementById('show-signup').addEventListener('click', showSignupForm);
+document.getElementById('show-login').addEventListener('click', showLoginForm);
+document.getElementById('submit-login').addEventListener('click', handleLogin);
+document.getElementById('submit-signup').addEventListener('click', handleSignup);
+
+// Close modal when clicking outside
+authModal.addEventListener('click', function(e) {
+    if (e.target === authModal) {
+        closeAuthModal();
+    }
+});
+
+// Mobile Menu Functions
+function toggleMobileMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+    if (mobileMenuOpen) {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    } else {
+        closeMobileMenu();
+    }
+}
+
+function closeMobileMenu() {
+    mobileMenuOpen = false;
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = 'auto';
+}
+
+// Page Navigation Functions
+function showHomePage() {
+    homePage.classList.remove('hidden');
+    bankingDashboard.classList.add('hidden');
+    wealthDatabase.classList.add('hidden');
+    
+    // Update navigation buttons based on login status
+    if (isLoggedIn) {
+        document.getElementById('login-btn').classList.add('hidden');
+        document.getElementById('logout-btn').classList.remove('hidden');
+        document.getElementById('mobile-login-btn').classList.add('hidden');
+        document.getElementById('mobile-logout-btn').classList.remove('hidden');
+    } else {
+        document.getElementById('login-btn').classList.remove('hidden');
+        document.getElementById('logout-btn').classList.add('hidden');
+        document.getElementById('mobile-login-btn').classList.remove('hidden');
+        document.getElementById('mobile-logout-btn').classList.add('hidden');
+    }
+}
+
+function showBankingDashboard() {
+    if (!isLoggedIn) {
+        showAuthModal();
+        return;
     }
     
-    // Add to home screen prompt
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        console.log('PWA installation available');
-    });
+    homePage.classList.add('hidden');
+    bankingDashboard.classList.remove('hidden');
+    wealthDatabase.classList.add('hidden');
+    
+    // Update user name in dashboard
+    document.getElementById('user-name').textContent = currentUser?.name || 'User';
+    
+    // Update navigation buttons
+    document.getElementById('login-btn').classList.add('hidden');
+    document.getElementById('logout-btn').classList.remove('hidden');
+    document.getElementById('mobile-login-btn').classList.add('hidden');
+    document.getElementById('mobile-logout-btn').classList.remove('hidden');
+}
 
-        // PWA Installation
-        let deferredPrompt;
-        const installPrompt = document.getElementById('install-prompt');
-        const installBtn = document.getElementById('install-btn');
-        const closeInstallPrompt = document.getElementById('close-install-prompt');
+function showWealthDatabase() {
+    homePage.classList.add('hidden');
+    bankingDashboard.classList.add('hidden');
+    wealthDatabase.classList.remove('hidden');
+    
+    // Update navigation buttons based on login status
+    if (isLoggedIn) {
+        document.getElementById('login-btn').classList.add('hidden');
+        document.getElementById('logout-btn').classList.remove('hidden');
+        document.getElementById('mobile-login-btn').classList.add('hidden');
+        document.getElementById('mobile-logout-btn').classList.remove('hidden');
+    } else {
+        document.getElementById('login-btn').classList.remove('hidden');
+        document.getElementById('logout-btn').classList.add('hidden');
+        document.getElementById('mobile-login-btn').classList.remove('hidden');
+        document.getElementById('mobile-logout-btn').classList.add('hidden');
+    }
+}
 
-        // Listen for beforeinstallprompt event
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            deferredPrompt = e;
-            // Show the install prompt
-            setTimeout(() => {
-                installPrompt.classList.remove('hidden');
-            }, 3000);
-        });
+// Auth Modal Functions
+function showAuthModal() {
+    authModal.classList.remove('hidden');
+    showLoginForm();
+}
 
-        // Install button handler
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                // Show the install prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installPrompt.classList.add('hidden');
-                }
-                // Clear the saved prompt since it can't be used again
-                deferredPrompt = null;
-            }
-        });
+function closeAuthModal() {
+    authModal.classList.add('hidden');
+    // Reset forms
+    document.getElementById('login-username').value = '';
+    document.getElementById('login-password').value = '';
+    document.getElementById('signup-name').value = '';
+    document.getElementById('signup-username').value = '';
+    document.getElementById('signup-password').value = '';
+}
 
-        // Close install prompt
-        closeInstallPrompt.addEventListener('click', () => {
-            installPrompt.classList.add('hidden');
-        });
+function showLoginForm() {
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+}
 
-        // Detect if app is running in standalone mode
-        function isRunningStandalone() {
-            return (window.matchMedia('(display-mode: standalone)').matches) || 
-                   (window.navigator.standalone) || 
-                   (document.referrer.includes('android-app://'));
-        }
+function showSignupForm() {
+    loginForm.classList.add('hidden');
+    signupForm.classList.remove('hidden');
+}
 
-        // Hide install prompt if already installed
-        if (isRunningStandalone()) {
-            installPrompt.classList.add('hidden');
-        }
-
-        // Your existing JavaScript code continues here...
-        // Application State
-        let currentUser = null;
-        let isLoggedIn = false;
-        let mobileMenuOpen = false;
-        
-        // Sample data - in a real app, this would come from a server
-        const sampleTransactions = [
-            { date: "2025-04-15", description: "Wire Transfer - International", amount: "-$250,000", status: "Completed" },
-            { date: "2025-04-12", description: "Dividend Payment - TSLA", amount: "+$12,450", status: "Completed" },
-            { date: "2025-04-10", description: "Stock Purchase - AMZN", amount: "-$75,000", status: "Completed" },
-            { date: "2025-04-05", description: "Monthly Service Fee", amount: "-$150", status: "Completed" },
-            { date: "2025-04-01", description: "Salary Deposit", amount: "+$45,000", status: "Completed" }
-        ];
-        
-        // DOM Elements
-        const homePage = document.getElementById('home-page');
-        const bankingDashboard = document.getElementById('banking-dashboard');
-        const wealthDatabase = document.getElementById('wealth-database');
-        const authModal = document.getElementById('auth-modal');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const transactionList = document.getElementById('transaction-list');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        
-        // Navigation Buttons
-        document.getElementById('home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
-        document.getElementById('database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
-        document.getElementById('login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
-        document.getElementById('logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
-        document.getElementById('home-login-btn').addEventListener('click', showAuthModal);
-        document.getElementById('home-database-btn').addEventListener('click', showWealthDatabase);
-        document.getElementById('back-to-home-from-db').addEventListener('click', showHomePage);
-        
-        // Mobile Navigation Buttons
-        document.getElementById('mobile-home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
-        document.getElementById('mobile-database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
-        document.getElementById('mobile-login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
-        document.getElementById('mobile-logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
-        
-        // Mobile Menu Toggle
-        mobileMenuButton.addEventListener('click', toggleMobileMenu);
-        
-        // Auth Modal Elements
-        document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
-        document.getElementById('show-signup').addEventListener('click', showSignupForm);
-        document.getElementById('show-login').addEventListener('click', showLoginForm);
-        document.getElementById('submit-login').addEventListener('click', handleLogin);
-        document.getElementById('submit-signup').addEventListener('click', handleSignup);
-        
-        // Close modal when clicking outside
-        authModal.addEventListener('click', function(e) {
-            if (e.target === authModal) {
-                closeAuthModal();
-            }
-        });
-        
-        // Mobile Menu Functions
-        function toggleMobileMenu() {
-            mobileMenuOpen = !mobileMenuOpen;
-            if (mobileMenuOpen) {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            } else {
-                closeMobileMenu();
-            }
-        }
-        
-        function closeMobileMenu() {
-            mobileMenuOpen = false;
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Page Navigation Functions
-        function showHomePage() {
-            homePage.classList.remove('hidden');
-            bankingDashboard.classList.add('hidden');
-            wealthDatabase.classList.add('hidden');
-            
-            // Update navigation buttons based on login status
-            if (isLoggedIn) {
-                document.getElementById('login-btn').classList.add('hidden');
-                document.getElementById('logout-btn').classList.remove('hidden');
-                document.getElementById('mobile-login-btn').classList.add('hidden');
-                document.getElementById('mobile-logout-btn').classList.remove('hidden');
-            } else {
-                document.getElementById('login-btn').classList.remove('hidden');
-                document.getElementById('logout-btn').classList.add('hidden');
-                document.getElementById('mobile-login-btn').classList.remove('hidden');
-                document.getElementById('mobile-logout-btn').classList.add('hidden');
-            }
-        }
-        
-        function showBankingDashboard() {
-            if (!isLoggedIn) {
-                showAuthModal();
-                return;
-            }
-            
-            homePage.classList.add('hidden');
-            bankingDashboard.classList.remove('hidden');
-            wealthDatabase.classList.add('hidden');
-            
-            // Update user name in dashboard
-            document.getElementById('user-name').textContent = currentUser?.name || 'User';
-            
-            // Update navigation buttons
-            document.getElementById('login-btn').classList.add('hidden');
-            document.getElementById('logout-btn').classList.remove('hidden');
-            document.getElementById('mobile-login-btn').classList.add('hidden');
-            document.getElementById('mobile-logout-btn').classList.remove('hidden');
-        }
-        
-        function showWealthDatabase() {
-            homePage.classList.add('hidden');
-            bankingDashboard.classList.add('hidden');
-            wealthDatabase.classList.remove('hidden');
-            
-            // Update navigation buttons based on login status
-            if (isLoggedIn) {
-                document.getElementById('login-btn').classList.add('hidden');
-                document.getElementById('logout-btn').classList.remove('hidden');
-                document.getElementById('mobile-login-btn').classList.add('hidden');
-                document.getElementById('mobile-logout-btn').classList.remove('hidden');
-            } else {
-                document.getElementById('login-btn').classList.remove('hidden');
-                document.getElementById('logout-btn').classList.add('hidden');
-                document.getElementById('mobile-login-btn').classList.remove('hidden');
-                document.getElementById('mobile-logout-btn').classList.add('hidden');
-            }
-        }
-        
-        // Auth Modal Functions
-        function showAuthModal() {
-            authModal.classList.remove('hidden');
-            showLoginForm();
-        }
-        
-        function closeAuthModal() {
-            authModal.classList.add('hidden');
-            // Reset forms
-            document.getElementById('login-username').value = '';
-            document.getElementById('login-password').value = '';
-            document.getElementById('signup-name').value = '';
-            document.getElementById('signup-username').value = '';
-            document.getElementById('signup-password').value = '';
-        }
-        
-        function showLoginForm() {
-            loginForm.classList.remove('hidden');
-            signupForm.classList.add('hidden');
-        }
-        
-        function showSignupForm() {
-            loginForm.classList.add('hidden');
-            signupForm.classList.remove('hidden');
-        }
-        
-        function handleLogin() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Simple validation
-            if (!username || !password) {
-                alert('Please enter both username and password');
-                return;
-            }
-            
-            // In a real app, this would be a server request
-            // For demo purposes, we'll use a simple check
-            if (username === 'admin' && password === 'password') {
-                currentUser = {
-                    name: 'Admin User',
-                    username: username
-                };
-                isLoggedIn = true;
-                localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
-                closeAuthModal();
-                showBankingDashboard();
-            } else {
-                // Try to get from localStorage (for demo)
-                const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
-                if (users[username] && users[username].password === password) {
-                    currentUser = {
-                        name: users[username].name,
-                        username: username
-                    };
-                    isLoggedIn = true;
-                    localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
-                    closeAuthModal();
-                    showBankingDashboard();
-                } else {
-                    alert('Invalid username or password');
-                }
-            }
-        }
-        
-        function handleSignup() {
-            const name = document.getElementById('signup-name').value;
-            const username = document.getElementById('signup-username').value;
-            const password = document.getElementById('signup-password').value;
-            
-            // Simple validation
-            if (!name || !username || !password) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // In a real app, this would be a server request
-            // For demo, we'll store in localStorage
-            const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
-            
-            if (users[username]) {
-                alert('Username already exists');
-                return;
-            }
-            
-            users[username] = {
-                name: name,
-                password: password
+function handleLogin() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    
+    // Simple validation
+    if (!username || !password) {
+        alert('Please enter both username and password');
+        return;
+    }
+    
+    // In a real app, this would be a server request
+    // For demo purposes, we'll use a simple check
+    if (username === 'admin' && password === 'password') {
+        currentUser = {
+            name: 'Admin User',
+            username: username
+        };
+        isLoggedIn = true;
+        localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
+        closeAuthModal();
+        showBankingDashboard();
+    } else {
+        // Try to get from localStorage (for demo)
+        const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
+        if (users[username] && users[username].password === password) {
+            currentUser = {
+                name: users[username].name,
+                username: username
             };
-            
-            localStorage.setItem('sporaxUsers', JSON.stringify(users));
-            
-            alert('Account created successfully! Please login.');
-            showLoginForm();
+            isLoggedIn = true;
+            localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
+            closeAuthModal();
+            showBankingDashboard();
+        } else {
+            alert('Invalid username or password');
         }
+    }
+}
+
+function handleSignup() {
+    const name = document.getElementById('signup-name').value;
+    const username = document.getElementById('signup-username').value;
+    const password = document.getElementById('signup-password').value;
+    
+    // Simple validation
+    if (!name || !username || !password) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
+    // In a real app, this would be a server request
+    // For demo, we'll store in localStorage
+    const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
+    
+    if (users[username]) {
+        alert('Username already exists');
+        return;
+    }
+    
+    users[username] = {
+        name: name,
+        password: password
+    };
+    
+    localStorage.setItem('sporaxUsers', JSON.stringify(users));
+    
+    alert('Account created successfully! Please login.');
+    showLoginForm();
+}
+
+function logout() {
+    currentUser = null;
+    isLoggedIn = false;
+    localStorage.removeItem('sporaxCurrentUser');
+    showHomePage();
+}
+
+// Initialize transaction list
+function initializeTransactions() {
+    transactionList.innerHTML = '';
+    
+    sampleTransactions.forEach(transaction => {
+        const row = document.createElement('tr');
+        row.className = 'border-b border-[#523D35] hover:bg-[#523D35] transition-colors';
         
-        function logout() {
-            currentUser = null;
-            isLoggedIn = false;
-            localStorage.removeItem('sporaxCurrentUser');
-            showHomePage();
-        }
+        row.innerHTML = `
+            <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.date}</td>
+            <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.description}</td>
+            <td class="py-3 px-4 sm:px-6 text-sm font-medium" style="color: ${transaction.amount.startsWith('+') ? '#BBA58F' : '#E8D9CD'}">${transaction.amount}</td>
+            <td class="py-3 px-4 sm:px-6 text-sm">
+                <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">${transaction.status}</span>
+            </td>
+        `;
         
-        // Initialize transaction list
-        function initializeTransactions() {
-            transactionList.innerHTML = '';
-            
-            sampleTransactions.forEach(transaction => {
-                const row = document.createElement('tr');
-                row.className = 'border-b border-[#523D35] hover:bg-[#523D35] transition-colors';
-                
-                row.innerHTML = `
-                    <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.date}</td>
-                    <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.description}</td>
-                    <td class="py-3 px-4 sm:px-6 text-sm font-medium" style="color: ${transaction.amount.startsWith('+') ? '#BBA58F' : '#E8D9CD'}">${transaction.amount}</td>
-                    <td class="py-3 px-4 sm:px-6 text-sm">
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">${transaction.status}</span>
-                    </td>
-                `;
-                
-                transactionList.appendChild(row);
-            });
-        }
-        
-        // Initialize the application
-        function initApp() {
-            // Don't show home page immediately - let splash screen handle it
-            initializeTransactions();
-            
-            // Check if user is already logged in (for demo purposes)
-            // In a real app, this would check for a valid session
-            const loggedInUser = localStorage.getItem('sporaxCurrentUser');
-            if (loggedInUser) {
-                currentUser = JSON.parse(loggedInUser);
-                isLoggedIn = true;
-                // Wait for splash screen to finish before showing dashboard
-                setTimeout(() => {
-                    showBankingDashboard();
-                }, 2000);
-            } else {
-                // Wait for splash screen to finish before showing home page
-                setTimeout(() => {
-                    showHomePage();
-                }, 2000);
-            }
-        }
+        transactionList.appendChild(row);
+    });
+}
+
+// Initialize the application - NOW CALLED FROM SPLASH SCREEN HANDLER
+function initApp() {
+    initializeTransactions();
+    
+    // Check if user is already logged in
+    const loggedInUser = localStorage.getItem('sporaxCurrentUser');
+    if (loggedInUser) {
+        currentUser = JSON.parse(loggedInUser);
+        isLoggedIn = true;
+        showBankingDashboard();
+    } else {
+        showHomePage();
+    }
+}
+
+// REMOVED: document.addEventListener('DOMContentLoaded', initApp);
+// The app now initializes after the splash screen is removed
         
         // Start the application after splash screen
         document.addEventListener('DOMContentLoaded', initApp);
