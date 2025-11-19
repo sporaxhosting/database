@@ -12,15 +12,18 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#223030">
     
-    <!-- App Icons -->
-    <link rel="icon" type="image/png" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/SwBgZdML/sporaxlogo.png">
+    <!-- App Icons - iOS REQUIRES 180x180 PNG -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/7dCf58rP/spor1.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/7dCf58rP/spor1.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/7dCf58rP/spor1.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/6cBySSGS/spor2.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/fVtGtYf8/spor3.png">
     
     <!-- Splash Screen Images -->
-    <link rel="apple-touch-startup-image" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIGZpbGw9IiMyMjMwMzAiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI0MDAiIHI9IjEwMCIgZmlsbD0iI0JCQTU4RiIvPjx0ZXh0IHg9IjUxMiIgeT0iNjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IiNFREQ5Q0QiPkRhdGFiYXNlPC90ZXh0Pjwvc3ZnPg==">
+    <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIGZpbGw9IiMyMjMwMzAiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI0MDAiIHI9IjEwMCIgZmlsbD0iI0JCQTU4RiIvPjx0ZXh0IHg9IjUxMiIgeT0iNjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IiNFREQ5Q0QiPlNQT1JBWDwvdGV4dD48L3N2Zz4=">
+    
+    <!-- Web App Manifest (for Android) -->
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNQT1JBWCIsCiAgInNob3J0X25hbWUiOiAiU1BPUkFYIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMjIzMDMwIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMjIzMDMwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pLmltZ2JiLmNvL1N3QmdaZE1ML3Nwb3JheGxvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9">
     
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -372,8 +375,8 @@
             <!-- Account Balance Card -->
             <div class="banking-card p-6 rounded-2xl lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,000</span></p>
-                <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">Today, 14:30</span></p>
+                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">151,014</span></p>
+                <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">3 minutes ago</span></p>
             </div>
             
             <!-- Quick Actions -->
@@ -381,7 +384,7 @@
                 <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Quick Actions</h2>
                 <div class="space-y-3">
                     <button class="w-full py-2 rounded-lg btn-primary text-sm font-medium">Transfer Funds</button>
-                    <button class="w-full py-2 rounded-lg btn-secondary text-sm font-medium">Pay Bills</button>
+                    <button class="w-full py-2 rounded-lg btn-secondary text-sm font-medium">Requested Bills</button>
                     <button class="w-full py-2 rounded-lg btn-secondary text-sm font-medium">View Statements</button>
                 </div>
             </div>
@@ -398,13 +401,13 @@
                 <div class="investment-card p-4 sm:p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Tesla Inc</h3>
-                            <p class="text-sm" style="color: #BBA58F;">TSLA • Electric Vehicles</p>
+                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">General Electric Co</h3>
+                            <p class="text-sm" style="color: #BBA58F;">GE • Electrical</p>
                         </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+2.4%</span>
+                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">-1.37%</span>
                     </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$720.54B</p>
-                    <p class="text-sm" style="color: #959D90;">Market Cap</p>
+                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$296.01 (43)</p>
+                    <p class="text-sm" style="color: #959D90;">Shares</p>
                 </div>
                 
                 <div class="investment-card p-4 sm:p-6 rounded-xl">
@@ -458,7 +461,7 @@
         
         <!-- Companies Section -->
         <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Featured Companies</h2>
+            <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Pinned Companies</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <div class="investment-card p-4 sm:p-6 rounded-xl">
@@ -467,22 +470,24 @@
                             <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">TS</span>
                         </div>
                         <div>
-                            <h3 class="font-bold" style="color: #E8D9CD;">Tesla Inc</h3>
-                            <p class="text-sm" style="color: #BBA58F;">Automotive</p>
+                            <h3 class="font-bold" style="color: #E8D9CD;">Marlnaj Insurance Bahrain</h3>
+                            <p class="text-sm" style="color: #BBA58F;">Auto-Insurance</p>
+                            <p class="text-sm" style="color: #BBA58F;">Your Company</p>
+
                         </div>
                     </div>
                     <div class="space-y-2">
                         <div class="flex justify-between">
                             <span style="color: #959D90;">Revenue</span>
-                            <span style="color: #E8D9CD;">$96.8B</span>
+                            <span style="color: #E8D9CD;">$1.12M</span>
                         </div>
                         <div class="flex justify-between">
-                            <span style="color: #959D90;">Taxes</span>
+                            <span style="color: #959D90;">Taxes & Fees</span>
                             <span style="color: #E8D9CD;">$4.2B</span>
                         </div>
                         <div class="flex justify-between">
                             <span style="color: #959D90;">Employees</span>
-                            <span style="color: #E8D9CD;">140,000</span>
+                            <span style="color: #E8D9CD;">17</span>
                         </div>
                     </div>
                 </div>
@@ -615,6 +620,19 @@
                 }, 500);
             }, 2000); // Show splash screen for 2 seconds
         });
+
+          // Force iOS to recognize PWA
+    if ('standalone' in navigator || window.matchMedia('(display-mode: standalone)').matches) {
+        document.documentElement.setAttribute('data-standalone', 'true');
+    }
+    
+    // Add to home screen prompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log('PWA installation available');
+    });
 
         // PWA Installation
         let deferredPrompt;
