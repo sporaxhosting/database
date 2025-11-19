@@ -464,7 +464,7 @@
 
         <!-- Database content would continue here -->
         <div class="text-center py-8 px-4">
-            <p class="text-sm sm:text-base" style="color: #BBA58F;">Wealth database functionality would be implemented here</p>
+            <div id="wealth-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-0 mt-10"></div>
             <button id="back-to-home-from-db" class="mt-6 px-6 py-3 rounded-lg btn-primary font-medium w-full sm:w-auto">Back to Home</button>
         </div>
     </div>
@@ -740,6 +740,149 @@
                 transactionList.appendChild(row);
             });
         }
+
+        /* ============================
+   SPORAX WEALTH DATABASE DATA
+   ============================ */
+
+const wealthData = [
+    {
+        name: "Elon Musk",
+        country: "USA",
+        flag: "🇺🇸",
+        position: "CEO, Tesla & SpaceX",
+        netWorth: 210000000000,
+        companies: ["Tesla", "SpaceX"]
+    },
+    {
+        name: "Jeff Bezos",
+        country: "USA",
+        flag: "🇺🇸",
+        position: "Executive Chairman, Amazon",
+        netWorth: 165000000000,
+        companies: ["Amazon", "Blue Origin"]
+    },
+    {
+        name: "Lars Bergström",
+        country: "Sweden",
+        flag: "🇸🇪",
+        position: "CEO, Nordic SafeBank",
+        netWorth: 420000000,
+        companies: ["Nordic SafeBank"]
+    },
+    {
+        name: "Owen Clarke",
+        country: "United Kingdom",
+        flag: "🇬🇧",
+        position: "CEO, Riverbridge Capital",
+        netWorth: 210800000,
+        companies: ["Riverbridge Capital"]
+    },
+    {
+        name: "Sophie Dubois",
+        country: "France",
+        flag: "🇫🇷",
+        position: "VC Partner, Orsay Capital",
+        netWorth: 120500000,
+        companies: ["Orsay Capital"]
+    }
+];
+
+/* ============================
+   FORMATTERS
+   ============================ */
+
+function formatMoney(n) {
+    return "$" + (n >= 1e9
+        ? (n / 1e9).toFixed(1) + "B"
+        : (n / 1e6).toFixed(1) + "M");
+}
+
+/* ============================
+   RENDER WEALTH CARDS
+   ============================ */
+
+function renderWealthCards(list) {
+    const container = document.getElementById("wealth-results");
+    container.innerHTML = "";
+
+    list.forEach(person => {
+        const card = document.createElement("div");
+        card.className =
+            "rounded-xl p-6 border border-[#523D35] card-bg shadow-lg hover:shadow-xl transition";
+
+        card.innerHTML = `
+            <div class="flex items-center mb-4">
+                <span class="text-3xl mr-3">${person.flag}</span>
+                <div>
+                    <h3 class="text-xl font-bold text-[#E8D9CD]">${person.name}</h3>
+                    <p class="text-sm text-[#BBA58F]">${person.country}</p>
+                </div>
+            </div>
+
+            <p class="text-3xl font-bold mb-3 text-[#E8D9CD]">
+                ${formatMoney(person.netWorth)}
+            </p>
+
+            <p class="text-sm text-[#959D90] mb-4">
+                ${person.position}
+            </p>
+
+            <div class="flex flex-wrap gap-2">
+                ${person.companies
+                    .map(c => `<span class="text-xs px-2 py-1 rounded bg-[#223030] text-[#BBA58F]">${c}</span>`)
+                    .join("")}
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+/* ============================
+   SEARCH FUNCTIONALITY
+   ============================ */
+
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+
+    const filtered = wealthData.filter(person =>
+        person.name.toLowerCase().includes(query) ||
+        person.country.toLowerCase().includes(query) ||
+        person.position.toLowerCase().includes(query) ||
+        person.companies.some(c => c.toLowerCase().includes(query))
+    );
+
+    renderWealthCards(filtered);
+});
+
+/* ============================
+   LOAD CARDS ON DATABASE OPEN
+   ============================ */
+
+function showWealthDatabase() {
+    homePage.classList.add('hidden');
+    bankingDashboard.classList.add('hidden');
+    wealthDatabase.classList.remove('hidden');
+
+    // render full dataset when the page opens
+    renderWealthCards(wealthData);
+
+    // existing nav button logic...
+    if (isLoggedIn) {
+        document.getElementById('login-btn').classList.add('hidden');
+        document.getElementById('logout-btn').classList.remove('hidden');
+        document.getElementById('mobile-login-btn').classList.add('hidden');
+        document.getElementById('mobile-logout-btn').classList.remove('hidden');
+    } else {
+        document.getElementById('login-btn').classList.remove('hidden');
+        document.getElementById('logout-btn').classList.add('hidden');
+        document.getElementById('mobile-login-btn').classList.remove('hidden');
+        document.getElementById('mobile-logout-btn').classList.add('hidden');
+    }
+}
         
         // Initialize the application
         function initApp() {
