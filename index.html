@@ -3,996 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORAX | Wealth Database & Banking</title>
-    
-    <!-- PWA Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SPORAX">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#223030">
-    
-    <!-- App Icons - iOS REQUIRES 180x180 PNG -->
-    <link rel="icon" type="image/png" href="https://i.ibb.co/7dCf58rP/spor1.png">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/7dCf58rP/spor1.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/7dCf58rP/spor1.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/6cBySSGS/spor2.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/fVtGtYf8/spor3.png">
-    
-    <!-- Splash Screen Images -->
-    <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIGZpbGw9IiMyMjMwMzAiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI0MDAiIHI9IjEwMCIgZmlsbD0iI0JCQTU4RiIvPjx0ZXh0IHg9IjUxMiIgeT0iNjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IiNFREQ5Q0QiPlNQT1JBWDwvdGV4dD48L3N2Zz4=">
-    
-    <!-- Web App Manifest (for Android) -->
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNQT1JBWCIsCiAgInNob3J0X25hbWUiOiAiU1BPUkFYIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMjIzMDMwIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMjIzMDMwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pLmltZ2JiLmNvL1N3QmdaZE1ML3Nwb3JheGxvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9">
-    
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="SPORAX">
+    <title>Sporax Company | Moving the Future</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/88/88269.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --dark-green: #223030;
-            --brown: #523D35;
-            --sage: #959D90;
-            --tan: #BBA58F;
-            --cream: #E8D9CD;
-            --off-white: #EFEFE9;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark-green);
-            color: var(--off-white);
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            overflow: auto; /* FIXED: Enable scrolling */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        
-        /* Prevent zoom on double-tap but allow scrolling */
-        button, a, input {
-            touch-action: manipulation;
-        }
-        
-        /* Allow scrolling on main content */
-        .scrollable {
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .header-gradient {
-            background: -webkit-linear-gradient(45deg, var(--tan), var(--cream));
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #888888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .card-bg {
-            background-color: var(--brown);
+
+        .hero-animate {
+            animation: fadeInUp 1s ease-out forwards;
         }
-        
-        .banking-card {
-            background: linear-gradient(135deg, var(--brown), var(--dark-green));
-            border: 1px solid var(--sage);
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .investment-card {
-            background-color: rgba(82, 61, 53, 0.7);
-            border: 1px solid var(--tan);
+
+        .stat-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 1px solid #222;
+            background: rgba(255, 255, 255, 0.01);
         }
-        
-        .btn-primary {
-            background-color: var(--tan);
-            color: var(--dark-green);
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #444;
+            background: rgba(255, 255, 255, 0.03);
         }
-        
-        .btn-primary:hover {
-            background-color: var(--cream);
+
+        .glow-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0px rgba(255, 255, 255, 0);
         }
-        
-        .btn-secondary {
-            background-color: var(--sage);
-            color: var(--dark-green);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--cream);
-        }
-        
-        /* Mobile menu styles */
-        .mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-        
-        /* iOS-specific styles */
-        @supports (-webkit-touch-callout: none) {
-            .ios-safe-area {
-                padding-top: env(safe-area-inset-top);
-                padding-bottom: env(safe-area-inset-bottom);
-            }
-            
-            .min-h-screen-ios {
-                min-height: -webkit-fill-available;
-            }
-        }
-        
-        /* Hide browser UI when in standalone mode */
-        @media all and (display-mode: standalone) {
-            body {
-                padding-top: env(safe-area-inset-top);
-            }
-            
-            nav {
-                padding-top: env(safe-area-inset-top);
-            }
-        }
-        
-        /* Splash Screen */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--dark-green), var(--brown));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-        
-        .splash-logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-        
-        .splash-text {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--tan), var(--cream));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-        
-        .splash-subtitle {
-            color: var(--sage);
-            font-size: 1rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-        
-        .splash-loading {
-            margin-top: 2rem;
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--sage);
-            border-top: 3px solid var(--tan);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Hide splash screen when app loads */
-        .splash-hidden {
-            opacity: 0;
-            pointer-events: none;
+
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="min-h-screen min-h-screen-ios ios-safe-area scrollable">
-    <!-- Splash Screen -->
-    <div id="splash-screen">
-        <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="splash-logo">
-        <div class="splash-text">SPORAX</div>
-        <div class="splash-subtitle">Wealth Database</div>
-        <div class="splash-loading"></div>
-    </div>
+<body>
 
-    <!-- Mobile Menu Button -->
-    <div class="lg:hidden fixed top-4 right-4 z-50" style="top: calc(env(safe-area-inset-top) + 1rem);">
-        <button id="mobile-menu-button" class="p-2 rounded-lg bg-[#523D35] text-[#E8D9CD]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-[#223030] z-40 lg:hidden ios-safe-area">
-        <div class="p-6 pt-20">
-            <div class="flex flex-col space-y-6">
-                <button id="mobile-home-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg bg-[#523D35] text-[#E8D9CD]">Home</button>
-                <button id="mobile-database-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg bg-[#523D35] text-[#E8D9CD]">Wealth Database</button>
-                <button id="mobile-login-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg btn-primary">Login</button>
-                <button id="mobile-logout-btn" class="text-left text-xl font-medium py-3 px-4 rounded-lg btn-secondary hidden">Logout</button>
-            </div>
+    <nav class="flex justify-between items-center p-8 max-w-7xl mx-auto">
+        <div class="flex items-center space-x-3">
+            <img src="https://cdn-icons-png.flaticon.com/128/88/88269.png" alt="Logo" class="w-8 h-8 invert">
+            <div class="text-2xl font-black tracking-tighter">SPORAX</div>
         </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="bg-[#223030] border-b border-[#523D35] py-4 sticky top-0 z-30 ios-safe-area">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-10 h-10">
-                <span class="text-2xl font-bold hidden sm:block" style="color: #E8D9CD;">SPORAX</span>
-            </div>
-            <div class="hidden lg:flex space-x-4">
-                <button id="home-btn" class="px-4 py-2 rounded-lg btn-primary font-medium">Home</button>
-                <button id="database-btn" class="px-4 py-2 rounded-lg btn-secondary font-medium">Wealth Database</button>
-                <button id="login-btn" class="px-4 py-2 rounded-lg btn-primary font-medium">Login</button>
-                <button id="logout-btn" class="px-4 py-2 rounded-lg btn-secondary font-medium hidden">Logout</button>
-            </div>
+        <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+            <a href="#" class="hover:text-white transition">Ecosystem</a>
+            <a href="#" class="hover:text-white transition">Technology</a>
+            <a href="#" class="hover:text-white transition">Investors</a>
         </div>
+        <a href="https://supuber.sporax.co" class="px-5 py-2 border border-white text-sm font-bold hover:bg-white hover:text-black transition duration-300">
+            SUPUBER →
+        </a>
     </nav>
 
-    <!-- Home Page -->
-    <div id="home-page" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="text-center mb-12">
-            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="SPORAX Logo" class="w-16 h-16 sm:w-20 sm:h-20">
-                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">SPORAX</h1>
-            </div>
-            <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto px-4" style="color: #E8D9CD;">
-                Your gateway to global wealth intelligence and premium banking services
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12 px-4">
-                <button id="home-login-btn" class="px-6 py-4 sm:px-8 sm:py-4 text-lg rounded-xl btn-primary font-bold w-full sm:w-auto">
-                    Login to Banking Portal
-                </button>
-                <button id="home-database-btn" class="px-6 py-4 sm:px-8 sm:py-4 text-lg rounded-xl btn-secondary font-bold w-full sm:w-auto">
-                    Explore Wealth Database
-                </button>
-            </div>
-            
-            <!-- Install App Prompt -->
-            <div id="install-prompt" class="bg-[#523D35] border border-[#BBA58F] rounded-xl p-6 max-w-md mx-auto mb-8 hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold" style="color: #E8D9CD;">Install SPORAX App</h3>
-                    <button id="close-install-prompt" class="text-[#959D90] hover:text-[#E8D9CD]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <p class="text-sm mb-4" style="color: #BBA58F;">
-                    Install SPORAX on your home screen for a native app experience
-                </p>
-                <div class="flex space-x-3">
-                    <button id="install-btn" class="flex-1 py-2 rounded-lg btn-primary text-sm font-medium">Install</button>
-                    <button class="flex-1 py-2 rounded-lg bg-[#223030] text-[#E8D9CD] text-sm font-medium border border-[#523D35]">Later</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto px-4">
-                <div class="p-6 rounded-xl banking-card">
-                    <h3 class="text-xl font-bold mb-3" style="color: #E8D9CD;">Wealth Database</h3>
-                    <p class="text-sm" style="color: #BBA58F;">
-                        Access our comprehensive database of global wealth and asset information
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl banking-card">
-                    <h3 class="text-xl font-bold mb-3" style="color: #E8D9CD;">Banking Services</h3>
-                    <p class="text-sm" style="color: #BBA58F;">
-                        Premium banking with investment tracking and financial insights
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl banking-card">
-                    <h3 class="text-xl font-bold mb-3" style="color: #E8D9CD;">Global Coverage</h3>
-                    <p class="text-sm" style="color: #BBA58F;">
-                        Reliable wealth analysis since 2003 with data from 40+ countries
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login/Signup Modal -->
-    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-        <div class="card-bg rounded-2xl p-6 sm:p-8 max-w-md w-full mx-2">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold" style="color: #E8D9CD;">SPORAX Banking</h2>
-                <button id="close-auth-modal" class="text-slate-400 hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="login-form">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2" style="color: #BBA58F;">Username</label>
-                    <input type="text" id="login-username" class="w-full p-3 rounded-lg bg-[#223030] border border-[#523D35] focus:outline-none focus:border-[#BBA58F]">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-2" style="color: #BBA58F;">Password</label>
-                    <input type="password" id="login-password" class="w-full p-3 rounded-lg bg-[#223030] border border-[#523D35] focus:outline-none focus:border-[#BBA58F]">
-                </div>
-                <button id="submit-login" class="w-full py-3 rounded-lg btn-primary font-bold mb-4">Login</button>
-                <p class="text-center text-sm" style="color: #959D90;">
-                    Don't have an account? 
-                    <button id="show-signup" class="text-[#BBA58F] hover:underline">Sign up</button>
-                </p>
-            </div>
-            
-            <div id="signup-form" class="hidden">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2" style="color: #BBA58F;">Full Name</label>
-                    <input type="text" id="signup-name" class="w-full p-3 rounded-lg bg-[#223030] border border-[#523D35] focus:outline-none focus:border-[#BBA58F]">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2" style="color: #BBA58F;">Username</label>
-                    <input type="text" id="signup-username" class="w-full p-3 rounded-lg bg-[#223030] border border-[#523D35] focus:outline-none focus:border-[#BBA58F]">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-2" style="color: #BBA58F;">Password</label>
-                    <input type="password" id="signup-password" class="w-full p-3 rounded-lg bg-[#223030] border border-[#523D35] focus:outline-none focus:border-[#BBA58F]">
-                </div>
-                <button id="submit-signup" class="w-full py-3 rounded-lg btn-primary font-bold mb-4">Create Account</button>
-                <p class="text-center text-sm" style="color: #959D90;">
-                    Already have an account? 
-                    <button id="show-login" class="text-[#BBA58F] hover:underline">Login</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Banking Dashboard (Visible only when logged in) -->
-    <div id="banking-dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 hidden">
-        <div class="mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold mb-2" style="color: #E8D9CD;">Banking Dashboard</h1>
-            <p class="text-[#BBA58F]">Welcome back, <span id="user-name">User</span></p>
-        </div>
+    <section class="max-w-7xl mx-auto px-8 py-32 text-center hero-animate">
+        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight">
+            The World in <span class="gradient-text">Motion.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+            Sporax is the parent architect of the next generation of logistics. 
+            Through our flagship service, Supuber, we are redefining how the world moves.
+        </p>
         
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Account Balance Card -->
-            <div class="banking-card p-6 rounded-2xl lg:col-span-2">
-                <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Account Balance</h2>
-                <p class="text-3xl sm:text-4xl font-bold mb-2 balance-text" style="color: #E8D9CD;">$<span id="account-balance">101,310.21</span></p>
-                <p class="text-sm" style="color: #959D90;">Last updated: <span id="balance-update-time">0 minutes ago</span></p>
-            </div>
-            
-            <!-- Quick Actions -->
-            <div class="banking-card p-6 rounded-2xl">
-                <h2 class="text-xl font-bold mb-4" style="color: #E8D9CD;">Quick Actions</h2>
-                <div class="space-y-3">
-                    <button class="w-full py-2 rounded-lg btn-primary text-sm font-medium">Transfer Funds</button>
-                    <button class="w-full py-2 rounded-lg btn-secondary text-sm font-medium">Requested Bills</button>
-                    <button class="w-full py-2 rounded-lg btn-secondary text-sm font-medium">View Statements</button>
-                </div>
-            </div>
+        <div class="flex justify-center">
+            <a href="https://supuber.sporax.co" class="glow-button bg-white text-black px-12 py-5 rounded-full font-bold text-xl">
+                Book a Ride
+            </a>
         </div>
-        
-        <!-- Investments Section -->
-        <div class="mb-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                <h2 class="text-2xl font-bold" style="color: #E8D9CD;">Your Investments</h2>
-                <button class="px-4 py-2 rounded-lg btn-primary text-sm font-medium w-full sm:w-auto">Explore Opportunities</button>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Republic Services Inc</h3>
-                            <p class="text-sm" style="color: #BBA58F;">RSG • Environmental</p>
-                        </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+9.53%</span>
-                    </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$217.47 (150)</p>
-                    <p class="text-sm" style="color: #959D90;">Shares</p>
-                </div>
-                
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">Apple Inc.</h3>
-                            <p class="text-sm" style="color: #BBA58F;">AAPL • Tech</p>
-                        </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">-0.4%</span>
-                    </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$268.56 (91)</p>
-                    <p class="text-sm" style="color: #959D90;">Shares</p>
-                </div>
-                
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="font-bold text-lg" style="color: #E8D9CD;">SoftBank Group Corp.</h3>
-                            <p class="text-sm" style="color: #BBA58F;">SFTBY • Banking</p>
-                        </div>
-                        <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">+0.8%</span>
-                    </div>
-                    <p class="text-xl sm:text-2xl font-bold mb-2" style="color: #E8D9CD;">$59.75 (419)</p>
-                    <p class="text-sm" style="color: #959D90;">Shares</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Transaction History -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Recent Transactions</h2>
-            
-            <div class="banking-card rounded-xl overflow-hidden">
-                <div class="table-responsive">
-                    <table class="w-full min-w-full">
-                        <thead>
-                            <tr class="border-b border-[#523D35]">
-                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Date</th>
-                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Description</th>
-                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Amount</th>
-                                <th class="text-left py-4 px-4 sm:px-6 font-medium" style="color: #BBA58F;">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transaction-list">
-                            <!-- Transactions will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Companies Section -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-6" style="color: #E8D9CD;">Pinned Companies</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
-                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">TS</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold" style="color: #E8D9CD;">Marlnaj Insurance Bahrain</h3>
-                            <p class="text-sm" style="color: #BBA58F;">Auto-Insurance</p>
-                            <p class="text-sm" style="color: #BBA58F;">Your Company</p>
+    </section>
 
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Revenue</span>
-                            <span style="color: #E8D9CD;">BH$1.06M</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Taxes & Fees</span>
-                            <span style="color: #E8D9CD;">Unknown</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Employees</span>
-                            <span style="color: #E8D9CD;">17</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
-                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">AM</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold" style="color: #E8D9CD;">Amazon.com</h3>
-                            <p class="text-sm" style="color: #BBA58F;">E-commerce</p>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Revenue</span>
-                            <span style="color: #E8D9CD;">$574.8B</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Taxes</span>
-                            <span style="color: #E8D9CD;">$18.7B</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Employees</span>
-                            <span style="color: #E8D9CD;">1,608,000</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="investment-card p-4 sm:p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#223030] flex items-center justify-center mr-3 sm:mr-4">
-                            <span class="font-bold text-sm sm:text-base" style="color: #BBA58F;">NS</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold" style="color: #E8D9CD;">Nordic SafeBank</h3>
-                            <p class="text-sm" style="color: #BBA58F;">Banking</p>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Revenue</span>
-                            <span style="color: #E8D9CD;">$4.2B</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Taxes</span>
-                            <span style="color: #E8D9CD;">$1.1B</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: #959D90;">Employees</span>
-                            <span style="color: #E8D9CD;">28,500</span>
-                        </div>
-                    </div>
-                </div>
+    <section class="max-w-7xl mx-auto px-8 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="stat-card p-10 rounded-2xl">
+                <h3 class="text-gray-500 uppercase text-xs font-bold tracking-widest mb-2">Performance</h3>
+                <div class="text-4xl font-bold mb-2">100%</div>
+                <p class="text-gray-400 text-sm">Uptime and availability during Super Bowl LXI peak demand windows.</p>
+            </div>
+
+            <div class="stat-card p-10 rounded-2xl">
+                <h3 class="text-gray-500 uppercase text-xs font-bold tracking-widest mb-2">Efficiency</h3>
+                <div class="text-4xl font-bold mb-2">&lt; 3.2 min</div>
+                <p class="text-gray-400 text-sm">Average pickup time across our global metropolitan hubs.</p>
+            </div>
+
+            <div class="stat-card p-10 rounded-2xl">
+                <h3 class="text-gray-500 uppercase text-xs font-bold tracking-widest mb-2">Safety</h3>
+                <div class="text-4xl font-bold mb-2">99.9%</div>
+                <p class="text-gray-400 text-sm">Incident-free rating across over 50 million completed journeys.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Wealth Database (Visible to all) -->
-    <div id="wealth-database" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 hidden">
-        <div class="text-center mb-12 pt-4">
-            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-12 h-12 sm:w-16 sm:h-16">
-                <h1 class="header-gradient text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-responsive">SPORAX</h1>
-            </div>
-            <p class="text-sm tracking-widest uppercase mt-2 px-4" style="letter-spacing: 0.4em; color: #959D90;">
-                Reliable Wealth Analysis since 2003
-            </p>
-            <div class="mt-8 w-full max-w-2xl mx-auto px-4">
-                <div class="flex items-center bg-[#523D35] rounded-xl p-3 border border-[#523D35] hover:border-[#BBA58F] transition-all duration-300 shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" style="color: #959D90;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input type="text" id="search-input" placeholder="Search individuals, companies, or assets..." class="w-full bg-transparent text-base sm:text-lg focus:outline-none" style="color: #E8D9CD;" placeholder-style="color: #959D90;" />
-                </div>
-            </div>
-        </div>
-
-        <section class="mb-12 p-6 sm:p-8 card-bg rounded-xl shadow-lg border border-[#523D35] text-center mx-4 sm:mx-0">
-            <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-3 mb-4">
-                <img src="https://i.ibb.co/SwBgZdML/sporaxlogo.png" alt="sporaxlogo" border="0" class="w-8 h-8">
-                <h2 class="text-2xl sm:text-3xl font-bold" style="color: #BBA58F;">What is SPORAX?</h2>
-            </div>
-            <p class="leading-relaxed max-w-4xl mx-auto text-sm sm:text-base px-2" style="color: #E8D9CD;">
-                SPORAX is a leading public wealth and asset database, dedicated to providing timely and highly accurate net worth estimations for notable individuals and valuable businesses globally.
-            </p>
-            <div class="flex flex-wrap gap-3 mt-6 text-xs sm:text-sm justify-center">
-                <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">RRPT - Public Transactions</span>
-                <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">IAR - Institutional Records</span>
-                <span class="inline-flex items-center rounded-full px-3 py-1" style="background-color: #223030; color: #BBA58F;">RNS - News Sources</span>
-            </div>
-        </section>
-
-        <!-- Database content would continue here -->
-        <div class="text-center py-8 px-4">
-            <div id="wealth-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-0 mt-10"></div>
-            <button id="back-to-home-from-db" class="mt-6 px-6 py-3 rounded-lg btn-primary font-medium w-full sm:w-auto">Back to Home</button>
-        </div>
-    </div>
-
-    <footer class="bg-[#223030] border-t border-[#523D35] mt-12 py-8 text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-sm mb-4" style="color: #959D90;">
-                © 2026 SPORAX Wealth & Asset Databases. All Rights Reserved.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
-                <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Privacy Policy</a>
-                <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Terms of Use</a>
-                <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Methodology</a>
-                <a href="#" class="hover:underline transition-colors" style="color: #BBA58F;">Careers</a>
-            </div>
-        </div>
+    <footer class="border-t border-zinc-900 mt-20 p-12 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/128/88/88269.png" alt="Logo" class="w-6 h-6 invert mx-auto mb-4 opacity-50">
+        <p class="text-zinc-600 text-xs tracking-widest uppercase">© 2026 Sporax Co. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        // Fix scrolling issue
-document.body.style.overflow = 'auto';
-document.body.style.webkitOverflowScrolling = 'touch';
-
-// Handle splash screen
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        const splashScreen = document.getElementById('splash-screen');
-        splashScreen.classList.add('splash-hidden');
-        
-        // Remove splash screen from DOM after fade out
-        setTimeout(function() {
-            splashScreen.remove();
-            // Initialize the app AFTER splash screen is completely removed
-            initApp();
-        }, 500);
-    }, 2000); // Show splash screen for 2 seconds
-});
-
-// Force iOS to recognize PWA
-if ('standalone' in navigator || window.matchMedia('(display-mode: standalone)').matches) {
-    document.documentElement.setAttribute('data-standalone', 'true');
-}
-
-// Add to home screen prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    console.log('PWA installation available');
-});
-
-// PWA Installation
-const installPrompt = document.getElementById('install-prompt');
-const installBtn = document.getElementById('install-btn');
-const closeInstallPrompt = document.getElementById('close-install-prompt');
-
-// Listen for beforeinstallprompt event
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the mini-infobar from appearing on mobile
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install prompt
-    setTimeout(() => {
-        installPrompt.classList.remove('hidden');
-    }, 3000);
-});
-
-// Install button handler
-installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        // Show the install prompt
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            installPrompt.classList.add('hidden');
-        }
-        // Clear the saved prompt since it can't be used again
-        deferredPrompt = null;
-    }
-});
-
-// Close install prompt
-closeInstallPrompt.addEventListener('click', () => {
-    installPrompt.classList.add('hidden');
-});
-
-// Detect if app is running in standalone mode
-function isRunningStandalone() {
-    return (window.matchMedia('(display-mode: standalone)').matches) || 
-           (window.navigator.standalone) || 
-           (document.referrer.includes('android-app://'));
-}
-
-// Hide install prompt if already installed
-if (isRunningStandalone()) {
-    installPrompt.classList.add('hidden');
-}
-
-// Your existing JavaScript code continues here...
-// Application State
-let currentUser = null;
-let isLoggedIn = false;
-let mobileMenuOpen = false;
-
-// Sample data - in a real app, this would come from a server
-const sampleTransactions = [
-{ date: "2025-11-17", description: "INTL WIRE UNITED DUBAI GOV. INT. REF#8842INTL", amount: "-$78,000", status: "Completed" },
-{ date: "2025-11-12", description: "INVOICE PAYMENT 1202 CLR#INV1202", amount: "+$12,132.05", status: "Completed" },
-{ date: "2025-11-11", description: "MOBILE CHECK DEPOSIT CHASE REF#MCD9842", amount: "+$9,842.00", status: "Completed" },
-{ date: "2025-11-11", description: "DEBIT CARD PURCHASE DUNKIN #4431 TERMINAL 09A", amount: "-$23.81", status: "Completed" },
-{ date: "2025-11-10", description: "INTL WIRE CLEARING HSBC REF#WIR40000INTL", amount: "-$40,000", status: "Completed" },
-{ date: "2025-11-10", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0021", amount: "-$14.92", status: "Completed" },
-{ date: "2025-11-09", description: "APPLE CASH TRANSFER DEVICE#AC250", amount: "-$250.00", status: "Completed" },
-{ date: "2025-11-09", description: "DEBIT CARD PURCHASE DUNKIN #2274 TERMINAL 44C", amount: "-$9.74", status: "Completed" },
-{ date: "2025-11-08", description: "TRANSFER MARLNAJ TECH CONV. REF#6400TRX", amount: "+$6,400.00", status: "Completed" },
-{ date: "2025-11-08", description: "POS PURCHASE MCDONALD'S 1153 TERMINAL 15B", amount: "-$12.59", status: "Completed" },
-{ date: "2025-11-07", description: "INTL WIRE UNITED BANK OF EMIRATES REF#18000INTL", amount: "-$18,000", status: "Completed" },
-{ date: "2025-11-07", description: "POS PURCHASE SHOPRITE CHESTER STORE#CH553", amount: "-$38.44", status: "Completed" },
-{ date: "2025-11-06", description: "PAYPAL *SERVICES PAYPAL REF#PP1204", amount: "+$1,204.77", status: "Completed" },
-{ date: "2025-11-05", description: "POS PURCHASE AMAZON MARKETPLACE TERM 03K", amount: "-$31.29", status: "Completed" },
-{ date: "2025-11-05", description: "INTERNATIONAL TRANSFER REVOLUT INTL REF#4920INTL", amount: "-$4,920.00", status: "Completed" },
-{ date: "2025-11-04", description: "POS PURCHASE CUMBERLAND FARMS STORE#CF201", amount: "-$8.51", status: "Completed" },
-{ date: "2025-11-03", description: "STRIPE PAYOUT 8832 CLR#STP8832", amount: "+$3,219.14", status: "Completed" },
-{ date: "2025-11-03", description: "DEBIT CARD PURCHASE DUNKIN #1981 TERMINAL 009A", amount: "-$6.70", status: "Completed" },
-{ date: "2025-11-02", description: "INTL WIRE BUSINESS FEE REF#1320INTL", amount: "-$1,320.00", status: "Completed" },
-{ date: "2025-11-02", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0024", amount: "-$18.25", status: "Completed" },
-{ date: "2025-11-01", description: "INTL CLEARING UNITED ARAB EMIRATES REF#2538191", amount: "+$25,381.91", status: "Completed" },
-{ date: "2025-11-01", description: "POS PURCHASE TACO BELL 3312 TERMINAL 3B1", amount: "-$11.41", status: "Completed" },
-{ date: "2025-10-31", description: "ZELLE PAYMENT RECEIVED ZELLE#640", amount: "+$640.00", status: "Completed" },
-{ date: "2025-10-30", description: "POS PURCHASE WALMART SUPERCENTER STORE#W292", amount: "-$29.88", status: "Completed" },
-{ date: "2025-10-29", description: "PAYPAL *INVOICE 4481 REF#PP4481", amount: "-$520.00", status: "Completed" },
-{ date: "2025-10-28", description: "POS PURCHASE SHELL SERVICE STATION TERM 77A", amount: "-$41.22", status: "Completed" },
-{ date: "2025-10-27", description: "TRANSFER CHASE P2P TRANSFER REF#P2P1100", amount: "+$1,100.00", status: "Completed" },
-{ date: "2025-10-26", description: "DEBIT CARD PURCHASE DUNKIN #0024 TERMINAL 01X", amount: "-$7.21", status: "Completed" },
-{ date: "2025-10-25", description: "POS PURCHASE AMAZON WEB SERVICES REF#AWS7216", amount: "-$72.16", status: "Completed" },
-{ date: "2025-10-24", description: "POS PURCHASE CVS PHARMACY 5532 STORE#CV5532", amount: "-$15.89", status: "Completed" },
-{ date: "2025-10-23", description: "STRIPE PAYOUT 7781 CLR#STP7781", amount: "+$2,511.90", status: "Completed" },
-{ date: "2025-10-22", description: "POS PURCHASE ORANGE COUNTY BAGEL TERM 0022", amount: "-$16.72", status: "Completed" },
-{ date: "2025-10-21", description: "INTL WIRE UNITED INTL CLEARING REF#12350INTL", amount: "-$12,350.00", status: "Completed" },
-{ date: "2025-10-20", description: "DEBIT CARD PURCHASE DUNKIN #9153 TERMINAL 09B", amount: "-$9.12", status: "Completed" },
-
-];
-
-// DOM Elements
-const homePage = document.getElementById('home-page');
-const bankingDashboard = document.getElementById('banking-dashboard');
-const wealthDatabase = document.getElementById('wealth-database');
-const authModal = document.getElementById('auth-modal');
-const loginForm = document.getElementById('login-form');
-const signupForm = document.getElementById('signup-form');
-const transactionList = document.getElementById('transaction-list');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-
-// Navigation Buttons
-document.getElementById('home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
-document.getElementById('database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
-document.getElementById('login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
-document.getElementById('logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
-document.getElementById('home-login-btn').addEventListener('click', showAuthModal);
-document.getElementById('home-database-btn').addEventListener('click', showWealthDatabase);
-document.getElementById('back-to-home-from-db').addEventListener('click', showHomePage);
-
-// Mobile Navigation Buttons
-document.getElementById('mobile-home-btn').addEventListener('click', () => { showHomePage(); closeMobileMenu(); });
-document.getElementById('mobile-database-btn').addEventListener('click', () => { showWealthDatabase(); closeMobileMenu(); });
-document.getElementById('mobile-login-btn').addEventListener('click', () => { showAuthModal(); closeMobileMenu(); });
-document.getElementById('mobile-logout-btn').addEventListener('click', () => { logout(); closeMobileMenu(); });
-
-// Mobile Menu Toggle
-mobileMenuButton.addEventListener('click', toggleMobileMenu);
-
-// Auth Modal Elements
-document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
-document.getElementById('show-signup').addEventListener('click', showSignupForm);
-document.getElementById('show-login').addEventListener('click', showLoginForm);
-document.getElementById('submit-login').addEventListener('click', handleLogin);
-document.getElementById('submit-signup').addEventListener('click', handleSignup);
-
-// Close modal when clicking outside
-authModal.addEventListener('click', function(e) {
-    if (e.target === authModal) {
-        closeAuthModal();
-    }
-});
-
-// Mobile Menu Functions
-function toggleMobileMenu() {
-    mobileMenuOpen = !mobileMenuOpen;
-    if (mobileMenuOpen) {
-        mobileMenu.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    } else {
-        closeMobileMenu();
-    }
-}
-
-function closeMobileMenu() {
-    mobileMenuOpen = false;
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = 'auto';
-}
-
-// Page Navigation Functions
-function showHomePage() {
-    homePage.classList.remove('hidden');
-    bankingDashboard.classList.add('hidden');
-    wealthDatabase.classList.add('hidden');
-    
-    // Update navigation buttons based on login status
-    if (isLoggedIn) {
-        document.getElementById('login-btn').classList.add('hidden');
-        document.getElementById('logout-btn').classList.remove('hidden');
-        document.getElementById('mobile-login-btn').classList.add('hidden');
-        document.getElementById('mobile-logout-btn').classList.remove('hidden');
-    } else {
-        document.getElementById('login-btn').classList.remove('hidden');
-        document.getElementById('logout-btn').classList.add('hidden');
-        document.getElementById('mobile-login-btn').classList.remove('hidden');
-        document.getElementById('mobile-logout-btn').classList.add('hidden');
-    }
-}
-
-function showBankingDashboard() {
-    if (!isLoggedIn) {
-        showAuthModal();
-        return;
-    }
-    
-    homePage.classList.add('hidden');
-    bankingDashboard.classList.remove('hidden');
-    wealthDatabase.classList.add('hidden');
-    
-    // Update user name in dashboard
-    document.getElementById('user-name').textContent = currentUser?.name || 'User';
-    
-    // Update navigation buttons
-    document.getElementById('login-btn').classList.add('hidden');
-    document.getElementById('logout-btn').classList.remove('hidden');
-    document.getElementById('mobile-login-btn').classList.add('hidden');
-    document.getElementById('mobile-logout-btn').classList.remove('hidden');
-}
-
-function showWealthDatabase() {
-    homePage.classList.add('hidden');
-    bankingDashboard.classList.add('hidden');
-    wealthDatabase.classList.remove('hidden');
-    
-    // Update navigation buttons based on login status
-    if (isLoggedIn) {
-        document.getElementById('login-btn').classList.add('hidden');
-        document.getElementById('logout-btn').classList.remove('hidden');
-        document.getElementById('mobile-login-btn').classList.add('hidden');
-        document.getElementById('mobile-logout-btn').classList.remove('hidden');
-    } else {
-        document.getElementById('login-btn').classList.remove('hidden');
-        document.getElementById('logout-btn').classList.add('hidden');
-        document.getElementById('mobile-login-btn').classList.remove('hidden');
-        document.getElementById('mobile-logout-btn').classList.add('hidden');
-    }
-}
-
-// Auth Modal Functions
-function showAuthModal() {
-    authModal.classList.remove('hidden');
-    showLoginForm();
-}
-
-function closeAuthModal() {
-    authModal.classList.add('hidden');
-    // Reset forms
-    document.getElementById('login-username').value = '';
-    document.getElementById('login-password').value = '';
-    document.getElementById('signup-name').value = '';
-    document.getElementById('signup-username').value = '';
-    document.getElementById('signup-password').value = '';
-}
-
-function showLoginForm() {
-    loginForm.classList.remove('hidden');
-    signupForm.classList.add('hidden');
-}
-
-function showSignupForm() {
-    loginForm.classList.add('hidden');
-    signupForm.classList.remove('hidden');
-}
-
-function handleLogin() {
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
-    
-    // Simple validation
-    if (!username || !password) {
-        alert('Please enter both username and password');
-        return;
-    }
-    
-    // In a real app, this would be a server request
-    // For demo purposes, we'll use a simple check
-    if (username === 'admin' && password === 'password') {
-        currentUser = {
-            name: 'Admin User',
-            username: username
-        };
-        isLoggedIn = true;
-        localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
-        closeAuthModal();
-        showBankingDashboard();
-    } else {
-        // Try to get from localStorage (for demo)
-        const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
-        if (users[username] && users[username].password === password) {
-            currentUser = {
-                name: users[username].name,
-                username: username
-            };
-            isLoggedIn = true;
-            localStorage.setItem('sporaxCurrentUser', JSON.stringify(currentUser));
-            closeAuthModal();
-            showBankingDashboard();
-        } else {
-            alert('Invalid username or password');
-        }
-    }
-}
-
-function handleSignup() {
-    const name = document.getElementById('signup-name').value;
-    const username = document.getElementById('signup-username').value;
-    const password = document.getElementById('signup-password').value;
-    
-    // Simple validation
-    if (!name || !username || !password) {
-        alert('Please fill in all fields');
-        return;
-    }
-    
-    // In a real app, this would be a server request
-    // For demo, we'll store in localStorage
-    const users = JSON.parse(localStorage.getItem('sporaxUsers') || '{}');
-    
-    if (users[username]) {
-        alert('Username already exists');
-        return;
-    }
-    
-    users[username] = {
-        name: name,
-        password: password
-    };
-    
-    localStorage.setItem('sporaxUsers', JSON.stringify(users));
-    
-    alert('Account created successfully! Please login.');
-    showLoginForm();
-}
-
-function logout() {
-    currentUser = null;
-    isLoggedIn = false;
-    localStorage.removeItem('sporaxCurrentUser');
-    showHomePage();
-}
-
-// Initialize transaction list
-function initializeTransactions() {
-    transactionList.innerHTML = '';
-    
-    sampleTransactions.forEach(transaction => {
-        const row = document.createElement('tr');
-        row.className = 'border-b border-[#523D35] hover:bg-[#523D35] transition-colors';
-        
-        row.innerHTML = `
-            <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.date}</td>
-            <td class="py-3 px-4 sm:px-6 text-sm" style="color: #E8D9CD;">${transaction.description}</td>
-            <td class="py-3 px-4 sm:px-6 text-sm font-medium" style="color: ${transaction.amount.startsWith('+') ? '#BBA58F' : '#E8D9CD'}">${transaction.amount}</td>
-            <td class="py-3 px-4 sm:px-6 text-sm">
-                <span class="px-2 py-1 rounded text-xs font-medium" style="background-color: #223030; color: #BBA58F;">${transaction.status}</span>
-            </td>
-        `;
-        
-        transactionList.appendChild(row);
-    });
-}
-
-// Initialize the application - NOW CALLED FROM SPLASH SCREEN HANDLER
-function initApp() {
-    initializeTransactions();
-    
-    // Check if user is already logged in
-    const loggedInUser = localStorage.getItem('sporaxCurrentUser');
-    if (loggedInUser) {
-        currentUser = JSON.parse(loggedInUser);
-        isLoggedIn = true;
-        showBankingDashboard();
-    } else {
-        showHomePage();
-    }
-}
-
-// REMOVED: document.addEventListener('DOMContentLoaded', initApp);
-// The app now initializes after the splash screen is removed
-        
-        // Start the application after splash screen
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
 </body>
 </html>
